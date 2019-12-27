@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/aboutus"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="STUDENT PLACEMENT SYSTEM
+
+
+
+
+
+
+
+                          The main objective of this Student Placement System App project is to develop an android application which manages placement activities in college makes an interactive GUI where the institute can manage details of students. The application main aim is to unite the students and companies on a platform so that the searching of jobs will be easy for students and searching for employees will be easy for companies also. In this application, companies will register and login into the application and post the notice of job by specifying all the details, like how many vacancies and requirements.
+
+
+
+                                                    The company will also conduct the internships so that also will be posted by adding internship details like whether it is full-time or part-time, etc. The students must also have registered and login into the application and the student can view the notices of internship and job available for that company so the student can apply by uploading a resume. Here in this application admin will give the placement assistance by providing training.
+
+ "
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
+
+    </ScrollView>
+
+
+
+
+
+</LinearLayout>

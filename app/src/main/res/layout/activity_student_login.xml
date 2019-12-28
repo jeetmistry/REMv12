@@ -36,7 +36,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewStudent"
         android:layout_width="220dp"
         android:layout_height="220dp"
         android:layout_marginTop="100dp"
@@ -49,7 +49,7 @@
         android:id="@+id/sv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/imageView">
+        android:layout_below="@+id/imageViewStudent">
 
         <RelativeLayout
             android:layout_width="match_parent"

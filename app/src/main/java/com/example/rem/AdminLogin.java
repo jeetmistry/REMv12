@@ -2,6 +2,7 @@ package com.example.rem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,11 @@ public class AdminLogin extends AppCompatActivity {
                 if(username.getText().toString().equals("Admin") && password.getText().toString().equals("1234")){
 
                     Toast.makeText(getApplicationContext(),"Redirecting..",Toast.LENGTH_SHORT).show();
+
+                    //JUST CHECKING THAT STUDENT NAVIGATION WORKS
+
+                    Intent intent=new Intent(AdminLogin.this,StudentNavigation.class);
+                    startActivity(intent);
                 }
                 else {
 

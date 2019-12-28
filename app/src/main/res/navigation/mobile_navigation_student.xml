@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation_student"
+    app:startDestination="@+id/nav_home_student">
+
+    <fragment
+        android:id="@+id/nav_home_student"
+        android:name="com.example.rem.ui_student.home_student.HomeFragmentStudent"
+        android:label="@string/menu_home_student"
+        tools:layout="@layout/fragment_home_student" />
+
+    <fragment
+        android:id="@+id/nav_profile_student"
+        android:name="com.example.rem.ui_student.profile_student.ProfileFragmentStudent"
+        android:label="@string/menu_profile_student"
+        tools:layout="@layout/fragment_profile_student" />
+
+    <fragment
+        android:id="@+id/nav_jobs_student"
+        android:name="com.example.rem.ui_student.jobs_student.JobsFragmentStudent"
+        android:label="@string/menu_jobs_student"
+        tools:layout="@layout/fragment_jobs_student" />
+
+    <fragment
+        android:id="@+id/nav_myapplications_student"
+        android:name="com.example.rem.ui_student.myapplications_student.MyapplicationsFragmentStudent"
+        android:label="@string/menu_myapplications_student"
+        tools:layout="@layout/fragment_myapplications_student" />
+
+    <fragment
+        android:id="@+id/nav_share_student"
+        android:name="com.example.rem.ui_student.share_student.ShareFragmentStudent"
+        android:label="@string/menu_share_student"
+        tools:layout="@layout/fragment_share_student" />
+
+    <fragment
+        android:id="@+id/nav_send_student"
+        android:name="com.example.rem.ui_student.send_student.SendFragmentStudent"
+        android:label="@string/menu_send_student"
+        tools:layout="@layout/fragment_send_student" />
+    <fragment
+        android:id="@+id/nav_logout_student"
+        android:name="com.example.rem.ui_student.logout_student.LogoutFragmentStudent"
+        android:label="@string/menu_logout_student"
+        />
+</navigation>

@@ -1,0 +1,9 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <item name="ic_menu_camera_student" type="drawable">@android:drawable/ic_menu_camera</item>
+    <item name="ic_menu_gallery_student" type="drawable">@android:drawable/ic_menu_gallery</item>
+    <item name="ic_menu_slideshow_student" type="drawable">@android:drawable/ic_menu_slideshow</item>
+    <item name="ic_menu_manage_student" type="drawable">@android:drawable/ic_menu_manage</item>
+    <item name="ic_menu_share_student" type="drawable">@android:drawable/ic_menu_share</item>
+    <item name="ic_menu_send_student" type="drawable">@android:drawable/ic_menu_send</item>
+
+</resources>

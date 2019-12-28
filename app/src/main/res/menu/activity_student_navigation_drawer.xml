@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view_student">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home_student"
+            android:icon="@drawable/ic_menu_camera_student"
+            android:title="@string/menu_home_student" />
+        <item
+            android:id="@+id/nav_profile_student"
+            android:icon="@drawable/ic_menu_gallery_student"
+            android:title="@string/menu_profile_student" />
+        <item
+            android:id="@+id/nav_jobs_student"
+            android:icon="@drawable/ic_menu_slideshow_student"
+            android:title="@string/menu_jobs_student" />
+        <item
+            android:id="@+id/nav_myapplications_student"
+            android:icon="@drawable/ic_menu_manage_student"
+            android:title="@string/menu_myapplications_student" />
+        <item
+            android:id="@+id/nav_logout_student"
+            android:icon="@drawable/ic_menu_logout_student"
+            android:title="@string/menu_logout_student" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share_student"
+                android:icon="@drawable/ic_menu_share_student"
+                android:title="@string/menu_share_student" />
+            <item
+                android:id="@+id/nav_send_student"
+                android:icon="@drawable/ic_menu_send_student"
+                android:title="@string/menu_send_student" />
+        </menu>
+    </item>
+
+</menu>

@@ -34,7 +34,7 @@ public class StudentNavigation extends AppCompatActivity {
         setContentView(R.layout.activity_student_navigation);
         Toolbar toolbar = findViewById(R.id.toolbar_student);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab_student);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +48,7 @@ public class StudentNavigation extends AppCompatActivity {
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home_student, R.id.nav_profile_student, R.id.nav_jobs_student,
-                R.id.nav_myapplications_student, R.id.nav_share_student, R.id.nav_send_student)
+                R.id.nav_myapplications_student, R.id.nav_help_student, R.id.nav_feedback_student)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_student);

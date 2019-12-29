@@ -6,36 +6,36 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home_student"
-            android:icon="@drawable/ic_menu_camera_student"
+            android:icon="@drawable/ic_menu_home"
             android:title="@string/menu_home_student" />
         <item
             android:id="@+id/nav_profile_student"
-            android:icon="@drawable/ic_menu_gallery_student"
+            android:icon="@drawable/ic_menu_profile"
             android:title="@string/menu_profile_student" />
         <item
             android:id="@+id/nav_jobs_student"
-            android:icon="@drawable/ic_menu_slideshow_student"
+            android:icon="@drawable/ic_menu_jobs"
             android:title="@string/menu_jobs_student" />
         <item
             android:id="@+id/nav_myapplications_student"
-            android:icon="@drawable/ic_menu_manage_student"
+            android:icon="@drawable/ic_menu_application"
             android:title="@string/menu_myapplications_student" />
         <item
             android:id="@+id/nav_logout_student"
-            android:icon="@drawable/ic_menu_logout_student"
+            android:icon="@drawable/ic_menu_logout"
             android:title="@string/menu_logout_student" />
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share_student"
-                android:icon="@drawable/ic_menu_share_student"
-                android:title="@string/menu_share_student" />
+                android:id="@+id/nav_help_student"
+                android:icon="@drawable/ic_menu_help"
+                android:title="@string/menu_help_student" />
             <item
-                android:id="@+id/nav_send_student"
-                android:icon="@drawable/ic_menu_send_student"
-                android:title="@string/menu_send_student" />
+                android:id="@+id/nav_feedback_student"
+                android:icon="@drawable/ic_menu_feedback"
+                android:title="@string/menu_feedback_student" />
         </menu>
     </item>
 

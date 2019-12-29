@@ -12,7 +12,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_activity);
 
-        TextView textView = findViewById(R.id.textView);
+        TextView textView = findViewById(R.id.textViewStudent);
         textView.setText(getIntent().getStringExtra("param"));
     }
 }

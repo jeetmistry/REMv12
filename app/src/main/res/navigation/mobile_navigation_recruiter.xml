@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.rem.ui_recruiter.home_recruiter.HomeFragmentRecruiter"
+        android:label="@string/menu_home_recruiter"
+        tools:layout="@layout/fragment_home_recruiter" />
+
+    <fragment
+        android:id="@+id/nav_profile_recruiter"
+        android:name="com.example.rem.ui_recruiter.profile_recruiter.ProfileFragmentRecruiter"
+        android:label="@string/menu_profile_recruiter"
+        tools:layout="@layout/fragment_profile_recruiter" />
+
+    <fragment
+        android:id="@+id/nav_viewjobs_recruiter"
+        android:name="com.example.rem.ui_recruiter.viewjobs_recruiter.ViewjobsFragmentRecruiter"
+        android:label="@string/menu_viewjobs_recruiter"
+        tools:layout="@layout/fragment_viewjobs_recruiter" />
+
+    <fragment
+        android:id="@+id/nav_addjob_recruiter"
+        android:name="com.example.rem.ui_recruiter.addjobs_recruiter.AddjobsFragmentRecruiter"
+        android:label="@string/menu_addjobs_recruiter"
+        tools:layout="@layout/fragment_addjobs_recruiter" />
+
+    <fragment
+        android:id="@+id/nav_help_recruiter"
+        android:name="com.example.rem.ui_recruiter.help_recruiter.HelpFragmentRecruiter"
+        android:label="@string/menu_help_recruiter"
+        tools:layout="@layout/fragment_help_recruiter" />
+
+    <fragment
+        android:id="@+id/nav_feedback_recruiter"
+        android:name="com.example.rem.ui_recruiter.feedback_recruiter.FeedbackFragmentRecruiter"
+        android:label="@string/menu_feedback_recruiter"
+        tools:layout="@layout/fragment_feedback_recruiter" />
+
+    <fragment
+        android:id="@+id/nav_viewapplications_recruiter"
+        android:name="com.example.rem.ui_recruiter.viewapplications_recruiter.ViewapplicationsFragmentRecruiter"
+        android:label="@string/menu_viewapplications_recruiter"
+        tools:layout="@layout/fragment_viewapplications_recruiter"/>
+
+    <fragment
+        android:id="@+id/nav_logout_recruiter"
+        android:name="com.example.rem.ui_recruiter.logout_recruiter.LogoutFragmentRecruiter"
+        android:label="@string/menu_logout_recruiter"/>
+</navigation>

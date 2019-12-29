@@ -30,16 +30,16 @@
         tools:layout="@layout/fragment_myapplications_student" />
 
     <fragment
-        android:id="@+id/nav_share_student"
-        android:name="com.example.rem.ui_student.share_student.ShareFragmentStudent"
-        android:label="@string/menu_share_student"
-        tools:layout="@layout/fragment_share_student" />
+        android:id="@+id/nav_help_student"
+        android:name="com.example.rem.ui_student.help_student.HelpFragmentStudent"
+        android:label="@string/menu_help_student"
+        tools:layout="@layout/fragment_help_student" />
 
     <fragment
-        android:id="@+id/nav_send_student"
-        android:name="com.example.rem.ui_student.send_student.SendFragmentStudent"
-        android:label="@string/menu_send_student"
-        tools:layout="@layout/fragment_send_student" />
+        android:id="@+id/nav_feedback_student"
+        android:name="com.example.rem.ui_student.feedback_student.FeedbackFragmentStudent"
+        android:label="@string/menu_feedback_student"
+        tools:layout="@layout/fragment_feedback_student" />
     <fragment
         android:id="@+id/nav_logout_student"
         android:name="com.example.rem.ui_student.logout_student.LogoutFragmentStudent"

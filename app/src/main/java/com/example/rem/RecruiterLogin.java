@@ -17,7 +17,7 @@ public class RecruiterLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recruiter_login);
-
+        btnLogin = (Button)findViewById(R.id.recruiter_Login);
         Signup= (TextView) findViewById(R.id.Signup);
 
         Signup.setOnClickListener(new View.OnClickListener() {
@@ -29,16 +29,13 @@ public class RecruiterLogin extends AppCompatActivity {
             }
         });
 
-//        btnLogin = (Button)findViewById(R.id.btnLogin);
-//        btnLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent in=new Intent(getApplicationContext(),StudentNavigation.class);
-//                startActivity(in);
-//
-//            }
-//        });
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in=new Intent(getApplicationContext(),RecruiterNavigation.class);
+                startActivity(in);
+            }
+        });
 
 
 

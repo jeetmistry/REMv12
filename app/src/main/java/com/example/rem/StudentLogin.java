@@ -29,16 +29,16 @@ public class StudentLogin extends AppCompatActivity {
             }
         });
 
-//        btnLogin = (Button)findViewById(R.id.btnLogin);
-//        btnLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent in=new Intent(getApplicationContext(),StudentNavigation.class);
-//                startActivity(in);
-//
-//            }
-//        });
+        btnLogin = (Button)findViewById(R.id.student_Login);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent in=new Intent(getApplicationContext(),StudentNavigation.class);
+                startActivity(in);
+
+            }
+        });
 
 
 

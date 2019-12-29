@@ -11,9 +11,5 @@ public class AboutUs extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
-
-        //just checking Recruiter Login Works
-        Intent intent = new Intent(getApplicationContext(),RecruiterNavigation.class);
-        startActivity(intent);
     }
 }

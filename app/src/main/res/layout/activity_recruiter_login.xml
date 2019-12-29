@@ -104,7 +104,7 @@
                 android:elevation="10dp">
 
                 <Button
-                    android:id="@+id/tvLogin"
+                    android:id="@+id/recruiter_Login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button"

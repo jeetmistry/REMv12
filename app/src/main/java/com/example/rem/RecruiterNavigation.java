@@ -1,10 +1,13 @@
 package com.example.rem;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.provider.Settings;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -31,7 +34,7 @@ public class RecruiterNavigation extends AppCompatActivity {
         setContentView(R.layout.activity_recruiter_navigation);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab_recruiter);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,11 +47,11 @@ public class RecruiterNavigation extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+                R.id.nav_home, R.id.nav_profile_recruiter, R.id.nav_viewjobs_recruiter,
+                R.id.nav_addjob_recruiter, R.id.nav_help_recruiter, R.id.nav_feedback_recruiter,R.id.nav_viewapplications_recruiter)
                 .setDrawerLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_recruiter);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
@@ -62,8 +65,18 @@ public class RecruiterNavigation extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_recruiter);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings_recruiter:
+                Intent settingIntent=new Intent(Settings.ACTION_SETTINGS);
+                startActivity(settingIntent);
+                return true;
+        }
+        return true;
     }
 }

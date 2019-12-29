@@ -22,7 +22,7 @@ public class AdminLogin extends AppCompatActivity {
 
         username = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);
-        btnlogin = (Button)findViewById(R.id.btnLogin);
+        btnlogin = (Button)findViewById(R.id.admin_Login);
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,11 +31,6 @@ public class AdminLogin extends AppCompatActivity {
                 if(username.getText().toString().equals("Admin") && password.getText().toString().equals("1234")){
 
                     Toast.makeText(getApplicationContext(),"Redirecting..",Toast.LENGTH_SHORT).show();
-
-                    //JUST CHECKING THAT STUDENT NAVIGATION WORKS
-
-                    Intent intent=new Intent(AdminLogin.this,StudentNavigation.class);
-                    startActivity(intent);
                 }
                 else {
 

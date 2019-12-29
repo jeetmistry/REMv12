@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_profile_student"
+    android:id="@+id/activity_profile_recruiter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,10 +10,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_profile_student"
+        android:id="@+id/text_profile_recruiter"
         android:visibility="invisible"/>
     <View
-        android:id="@+id/viewstudentprofile"
+        android:id="@+id/viewrecruiterprofile"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_alignParentStart="true"
@@ -22,13 +22,13 @@
         android:background="@color/colorBlue" />
 
     <ScrollView
-        android:id="@+id/scrolView_profile_student"
+        android:id="@+id/scrolView_profile_recruiter"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
         <RelativeLayout
-            android:id="@+id/linear_profile_student"
+            android:id="@+id/linear_profile_recruiter"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -62,7 +62,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/student_profile_username"
+                            android:id="@+id/recruiter_profile_name"
                             android:hint="Please Enter Full Name"
                             android:imeOptions="actionNext"
                             android:textColorHint="@color/colorBlue" />
@@ -78,7 +78,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Email Address"
-                            android:id="@+id/student_profile_email"
+                            android:id="@+id/recruiter_profile_email"
                             android:imeOptions="actionNext"
                             android:inputType="textEmailAddress"
                             android:textColorHint="@color/colorBlue" />
@@ -94,7 +94,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/student_profile_password"
+                            android:id="@+id/recruiter_profile_password"
                             android:hint="password"
                             android:imeOptions="actionNext"
                             android:inputType="textPassword"
@@ -106,7 +106,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Qualification"
+                        android:text="Company Details"
                         android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -117,8 +117,8 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/student_profile_qualification"
-                            android:hint="Enter your Qualification"
+                            android:id="@+id/recruiter_profile_company_name"
+                            android:hint="Enter your Company Name"
                             android:imeOptions="actionNext"
                             android:textColorHint="@color/colorBlue" />
 
@@ -132,8 +132,8 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/student_profile_passing_year"
-                            android:hint="Enter Passing Year"
+                            android:id="@+id/student_profile_company_location"
+                            android:hint="Enter Company Location"
                             android:imeOptions="actionNext"
                             android:textColorHint="@color/colorBlue" />
 
@@ -149,69 +149,53 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="Fields of Interest"
+                            android:text="Field of Work"
                             android:textStyle="bold" />
 
                         <CheckBox
-                            android:id="@+id/student_checkbox_IT"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
                             android:text="IT"
-                            android:textColor="@color/colorBlue" />
-
+                            android:textColor="@color/colorBlue"
+                            android:id="@+id/recruiter_checkbox_IT"/>
                         <CheckBox
-                            android:id="@+id/student_checkbox_CO"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
-                            android:text="Computer Engineering"
-                            android:textColor="@color/colorBlue" />
-
+                            android:text="Computer Software"
+                            android:textColor="@color/colorBlue"
+                            android:id="@+id/recruiter_checkbox_CS"/>
                         <CheckBox
-                            android:id="@+id/student_checkbox_CS"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
-                            android:text="Computer Science"
-                            android:textColor="@color/colorBlue" />
-
+                            android:text="Artificial Intelligence"
+                            android:textColor="@color/colorBlue"
+                            android:id="@+id/recruiter_checkbox_AI"/>
                         <CheckBox
-                            android:id="@+id/student_checkbox_ME"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
-                            android:text="Mechanical Engineering"
-                            android:textColor="@color/colorBlue" />
-
+                            android:text="Mechanical"
+                            android:textColor="@color/colorBlue"
+                            android:id="@+id/recruiter_checkbox_ME"/>
                         <CheckBox
-                            android:id="@+id/srudent_checkbox_Civil"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
-                            android:text="Civil Engineering"
-                            android:textColor="@color/colorBlue" />
-
+                            android:text="Civil Constructions"
+                            android:textColor="@color/colorBlue"
+                            android:id="@+id/recruiter_checkbox_civil"/>
                         <CheckBox
-                            android:id="@+id/student_checkbox_Chemical"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
-                            android:text="Chemical Engineering"
-                            android:textColor="@color/colorBlue" />
+                            android:text="Chemical"
+                            android:textColor="@color/colorBlue"
+                            android:id="@+id/recruiter_checkbox_Chemical"/>
 
-                        <CheckBox
-                            android:id="@+id/student_checkbox_Civilcheckbox_Auto"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
-                            android:text="Automobile Engineering"
-                            android:textColor="@color/colorBlue" />
+
+
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <Button
-                        android:id="@+id/student_profile_resumesavebutton"
+                        android:id="@+id/recruiter_profile_savebutton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -231,21 +215,21 @@
                 android:layout_alignParentStart="true">
 
                 <ImageView
-                    android:id="@+id/student_profile_imageView"
+                    android:id="@+id/recruiter_profile_imageView"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/student"
+                    android:src="@drawable/recruter"
                     />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_alignEnd="@+id/student_profile_imageView"
+                    android:layout_alignEnd="@+id/recruiter_profile_imageView"
                     android:layout_marginTop="10dp"
-                    android:id="@+id/student_profile_floatingActionButton"
+                    android:id="@+id/recruiter_profile_floatingActionButton"
                     android:src="@drawable/change_picture_student"
                     />
 

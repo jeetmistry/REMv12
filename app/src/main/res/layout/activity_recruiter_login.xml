@@ -14,6 +14,15 @@
         android:layout_height="90dp"
         android:background="@drawable/header_register"
         android:elevation="5dp">
+        <ProgressBar
+            android:id="@+id/recruiter_progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="120dp"
+            android:layout_marginLeft="170dp"
+            android:visibility="gone"
+            />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -71,7 +80,7 @@
 
 
                     <EditText
-                        android:id="@+id/username"
+                        android:id="@+id/recruiter_login_username"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -80,9 +89,9 @@
                         android:hint="Username" />
 
 
-
                     <EditText
-                        android:id="@+id/password"
+                        android:id="@+id/recruiter_login_password"
+                        android:inputType="textPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -123,7 +132,7 @@
                 android:elevation="10dp"/>
 
             <TextView
-                android:id="@+id/tvForgot"
+                android:id="@+id/recruiter_login_forgot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cv"
@@ -137,7 +146,7 @@
                 android:id="@+id/Register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvForgot"
+                android:layout_below="@+id/recruiter_login_forgot"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:elevation="5dp"
@@ -145,7 +154,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/Signup"
+                android:id="@+id/recruiter_login_Signup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/Register"

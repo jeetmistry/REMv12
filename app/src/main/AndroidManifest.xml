@@ -9,10 +9,12 @@
         android:roundIcon="@mipmap/ic_remlogo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".recruiter_password"></activity>
+        <activity android:name=".student_password" />
         <activity
             android:name=".RecruiterNavigation"
             android:label="@string/title_activity_recruiter_navigation"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".StudentNavigation"
             android:label="@string/title_activity_student_navigation"

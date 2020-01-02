@@ -1,19 +1,14 @@
 package com.example.rem;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
-
 import android.animation.ArgbEvaluator;
 import android.os.Bundle;
-
 import java.util.ArrayList;
 import java.util.List;
-
 public class LoginOption extends AppCompatActivity {
-
     ViewPager viewPager;
     Adapter adapter;
-    List<Model> models;
+    List<Model>models;
     Integer[] colors = null;
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
 

@@ -140,6 +140,7 @@
                 android:layout_marginTop="10dp"
                 android:elevation="5dp"
                 android:text="Forgot your password?"
+                android:textColor="@color/colorPurple"
                 android:textSize="14sp" />
 
             <TextView

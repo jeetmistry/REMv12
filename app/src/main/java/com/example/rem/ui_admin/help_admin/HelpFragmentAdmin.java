@@ -1,4 +1,4 @@
-package com.example.rem.ui_recruiter.home_recruiter;
+package com.example.rem.ui_admin.help_admin;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.rem.R;
 
-public class HomeFragmentRecruiter extends Fragment {
+public class HelpFragmentAdmin extends Fragment {
 
-    private HomeViewModelRecruiter homeViewModelRecruiter;
+    private HelpViewModelAdmin helpViewModelAdmin;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModelRecruiter =
-                ViewModelProviders.of(this).get(HomeViewModelRecruiter.class);
-        View root = inflater.inflate(R.layout.fragment_home_recruiter, container, false);
-        final TextView textView = root.findViewById(R.id.text_home_recruiter);
-        homeViewModelRecruiter.getText().observe(this, new Observer<String>() {
+        helpViewModelAdmin =
+                ViewModelProviders.of(this).get(HelpViewModelAdmin.class);
+        View root = inflater.inflate(R.layout.fragment_help_admin, container, false);
+        final TextView textView = root.findViewById(R.id.text_share);
+        helpViewModelAdmin.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
@@ -32,5 +32,4 @@ public class HomeFragmentRecruiter extends Fragment {
         });
         return root;
     }
-
 }

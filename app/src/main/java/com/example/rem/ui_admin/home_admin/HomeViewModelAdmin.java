@@ -1,16 +1,16 @@
-package com.example.rem.ui_student.home_student;
+package com.example.rem.ui_admin.home_admin;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModelStudent extends ViewModel {
+public class HomeViewModelAdmin extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModelStudent() {
+    public HomeViewModelAdmin() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is student home_admin fragment");
+        mText.setValue("This is Admin Home fragment");
     }
 
     public LiveData<String> getText() {

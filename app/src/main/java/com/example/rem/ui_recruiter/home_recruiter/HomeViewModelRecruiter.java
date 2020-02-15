@@ -10,7 +10,7 @@ public class HomeViewModelRecruiter extends ViewModel {
 
     public HomeViewModelRecruiter() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is recruiter home fragment");
+        mText.setValue("This is recruiter home_admin fragment");
     }
 
     public LiveData<String> getText() {

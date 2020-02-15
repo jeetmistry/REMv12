@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home_admin">
+
+    <fragment
+        android:id="@+id/nav_home_admin"
+        android:name="com.example.rem.ui_admin.home_admin.HomeFragmentAdmin"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home_admin" />
+
+    <fragment
+        android:id="@+id/nav_profile_admin"
+        android:name="com.example.rem.ui_admin.profile_admin.ProfileFragmentAdmin"
+        android:label="@string/menu_profile_admin"
+        tools:layout="@layout/fragment_profile_admin" />
+
+    <fragment
+        android:id="@+id/nav_viewcompanies_admin"
+        android:name="com.example.rem.ui_admin.viewcompanies_admin.ViewcompaniesFragmentAdmin"
+        android:label="@string/menu_viewcompanies_admin"
+        tools:layout="@layout/fragment_viewcompanies_admin" />
+
+    <fragment
+        android:id="@+id/nav_viewstudents_admin"
+        android:name="com.example.rem.ui_admin.viewstudents_admin.ViewstudentsFragment"
+        android:label="@string/menu_viewstudents_admin"
+        tools:layout="@layout/fragment_viewstudent_admin" />
+
+    <fragment
+        android:id="@+id/nav_help_admin"
+        android:name="com.example.rem.ui_admin.help_admin.HelpFragmentAdmin"
+        android:label="@string/menu_help_admin"
+        tools:layout="@layout/fragment_help_admin" />
+
+    <fragment
+        android:id="@+id/nav_viewfeedbacks_admin"
+        android:name="com.example.rem.ui_admin.viewfeedback_admin.ViewfeedbacksFragmentAdmin"
+        android:label="@string/menu_viewfeedbacks_admin"
+        tools:layout="@layout/fragment_viewfeedback_admin" />
+
+    <fragment
+        android:id="@+id/nav_logout_admin"
+        android:name="com.example.rem.ui_admin.logout_admin.LogoutFragmentAdmin"
+        android:label="@string/menu_logout_admin"/>
+</navigation>

@@ -24,17 +24,17 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 
-public class RecruiterNavigation extends AppCompatActivity {
+public class AdminNavigation extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recruiter_navigation);
+        setContentView(R.layout.activity_admin_navigation);
         Toolbar toolbar = findViewById(R.id.toolbar_recruiter);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab_recruiter);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,11 +47,11 @@ public class RecruiterNavigation extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home_admin, R.id.nav_profile_recruiter, R.id.nav_viewjobs_recruiter,
-                R.id.nav_addjob_recruiter, R.id.nav_help_recruiter, R.id.nav_feedback_recruiter,R.id.nav_viewapplications_recruiter)
+                R.id.nav_home_admin, R.id.nav_profile_admin, R.id.nav_viewcompanies_admin,
+                R.id.nav_viewstudents_admin, R.id.nav_help_admin, R.id.nav_viewfeedbacks_admin)
                 .setDrawerLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_recruiter);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
@@ -59,24 +59,29 @@ public class RecruiterNavigation extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.recruiter_navigation, menu);
+        getMenuInflater().inflate(R.menu.admin_navigation, menu);
         return true;
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_recruiter);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings_recruiter:
+            case R.id.action_settings_admin:
                 Intent settingIntent=new Intent(Settings.ACTION_SETTINGS);
                 startActivity(settingIntent);
                 return true;
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        //does nothing
     }
 }

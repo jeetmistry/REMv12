@@ -32,4 +32,20 @@
     <string name="menu_feedback_recruiter">Feedback</string>
     <string name="menu_viewapplications_recruiter">View Applications</string>
     <string name="menu_logout_recruiter">Logout</string>
+
+    <string name="title_activity_admin_navigation">RecruiterNavigation</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Admin Name</string>
+    <string name="nav_header_subtitle">adminemail@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_profile_admin">Profile</string>
+    <string name="menu_viewcompanies_admin">View Companies</string>
+    <string name="menu_viewstudents_admin">View Students</string>
+    <string name="menu_help_admin">Help</string>
+    <string name="menu_viewfeedbacks_admin">View Feedbacks</string>
+    <string name="menu_logout_admin">Logout</string>
 </resources>

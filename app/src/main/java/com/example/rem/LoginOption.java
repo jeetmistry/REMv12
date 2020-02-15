@@ -2,14 +2,22 @@ package com.example.rem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 import android.animation.ArgbEvaluator;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.System.exit;
+
 public class LoginOption extends AppCompatActivity {
     ViewPager viewPager;
     Adapter adapter;
     List<Model>models;
     Integer[] colors = null;
+    AlertDialog.Builder builder;
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
 
     @Override
@@ -69,5 +77,31 @@ public class LoginOption extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public void onBackPressed() {
+        builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you want to close this application ?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        moveTaskToBack(true);
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                        System.exit(1);
+                        Toast.makeText(getApplicationContext(),"Closing Recruit'Em",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //  Action for 'NO' Button
+                        dialog.cancel();
+                    }
+                });
+        //creating alert dialog
+        AlertDialog alert = builder.create();
+        //Setting the title manually
+        alert.setTitle("Exit Application");
+        alert.show();
     }
 }

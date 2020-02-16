@@ -68,7 +68,7 @@ public class ProfileFragmentRecruiter extends Fragment {
     }
 
     public void showPictureDialog(){
-        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(getActivity().getApplicationContext());
+        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(getActivity());
         pictureDialog.setTitle("Select Action");
         String[] pictureDialogItems = {
                 "Select photo from gallery",

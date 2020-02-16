@@ -1,5 +1,6 @@
 package com.example.rem.ui_recruiter.profile_recruiter;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +25,8 @@ import com.example.rem.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
+
+import static android.app.Activity.RESULT_OK;
 
 public class ProfileFragmentRecruiter extends Fragment {
 
@@ -93,14 +96,14 @@ public class ProfileFragmentRecruiter extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == this.RESULT_CANCELED) {
-//            return;
-//        }
-        if (requestCode == GALLERY) {
+        if (resultCode == Activity.RESULT_CANCELED) {
+            return;
+        }
+        if (requestCode == GALLERY && resultCode==RESULT_OK) {
             if (data != null) {
                 Uri contentURI = data.getData();
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), contentURI);
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), contentURI);
 
                     Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();
                     profileImage.setImageBitmap(bitmap);
@@ -111,7 +114,7 @@ public class ProfileFragmentRecruiter extends Fragment {
                 }
             }
 
-        } else if (requestCode == CAMERA) {
+        } else if (requestCode == CAMERA && resultCode==RESULT_OK) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             profileImage.setImageBitmap(thumbnail);
 

@@ -1,12 +1,15 @@
 package com.example.rem.ui_student.profile_student;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +26,12 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.rem.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
+
+import static android.app.Activity.RESULT_OK;
 
 public class ProfileFragmentStudent extends Fragment {
 
@@ -53,11 +61,12 @@ public class ProfileFragmentStudent extends Fragment {
         });
         return root;
     }
+    //FUNCTION FOR CTAKING PHOTO FROM CAMERA INTENT
     private void takePhotoFromCamera() {
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, CAMERA);
     }
-
+    //FUNCTION FOR CHOOSING IMAGE FROM GALLERY INTENT
     private void choosePhotoFromGallary() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -65,6 +74,7 @@ public class ProfileFragmentStudent extends Fragment {
         startActivityForResult(galleryIntent, GALLERY);
     }
 
+    //ALERT DIALOG ASKING GALLERY OR CAMERA INTENT
     public void showPictureDialog(){
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(getActivity());
         pictureDialog.setTitle("Select Action");
@@ -87,18 +97,20 @@ public class ProfileFragmentStudent extends Fragment {
                 });
         pictureDialog.show();
     }
+
+    //For storing data in imageview of student profile
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == this.RESULT_CANCELED) {
-//            return;
-//        }
-        if (requestCode == GALLERY) {
+        if (resultCode == Activity.RESULT_CANCELED) {
+            return;
+        }
+        if (requestCode == GALLERY && resultCode==RESULT_OK) {
             if (data != null) {
                 Uri contentURI = data.getData();
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), contentURI);
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), contentURI);
 
                     Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();
                     profileImage.setImageBitmap(bitmap);
@@ -109,11 +121,12 @@ public class ProfileFragmentStudent extends Fragment {
                 }
             }
 
-        } else if (requestCode == CAMERA) {
+        } else if (requestCode == CAMERA && resultCode==RESULT_OK) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             profileImage.setImageBitmap(thumbnail);
 
             Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

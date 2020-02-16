@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import static com.google.firebase.auth.FirebaseAuth.*;
 
 public class StudentLogin extends AppCompatActivity {
@@ -25,6 +27,21 @@ public class StudentLogin extends AppCompatActivity {
     private TextView Student_signup;
     private FirebaseAuth mAuth;
     private TextView forgotPassword;
+
+    //for one time login
+
+    FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+            if (firebaseUser != null) {
+                Intent intent = new Intent(getApplicationContext(), StudentNavigation.class);
+                startActivity(intent);
+                finish();
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +114,18 @@ public class StudentLogin extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),student_password.class));
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAuth.removeAuthStateListener(authStateListener);
     }
 
 

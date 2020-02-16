@@ -12,10 +12,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.rem.LoginOption;
 import com.example.rem.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LogoutFragmentRecruiter extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        FirebaseAuth.getInstance().signOut();
         Intent logout = new Intent(getActivity(), LoginOption.class);
         Toast.makeText(getActivity(), "Logging Out From Recruiter ...", Toast.LENGTH_SHORT).show();
         startActivity(logout);

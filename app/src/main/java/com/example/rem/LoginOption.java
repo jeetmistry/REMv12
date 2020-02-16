@@ -1,14 +1,21 @@
 package com.example.rem;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 import android.animation.ArgbEvaluator;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 import java.util.List;
+import com.example.rem.R;
 
 import static java.lang.System.exit;
 
@@ -104,4 +111,5 @@ public class LoginOption extends AppCompatActivity {
         alert.setTitle("Exit Application");
         alert.show();
     }
+
 }

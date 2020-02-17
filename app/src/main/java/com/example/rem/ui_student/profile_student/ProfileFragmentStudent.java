@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,7 +26,9 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.rem.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.storage.FirebaseStorage;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -37,21 +40,27 @@ public class ProfileFragmentStudent extends Fragment {
 
     private ProfileViewModelStudent profileViewModelStudent;
     private ImageView profileImage ;
+    private ImageView navprofileImage;
     private FloatingActionButton selectImage ;
     private int GALLERY = 1 , CAMERA = 2;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         profileViewModelStudent =
                 ViewModelProviders.of(this).get(ProfileViewModelStudent.class);
-        View root = inflater.inflate(R.layout.fragment_profile_student, container, false);
+       final View root = inflater.inflate(R.layout.fragment_profile_student, container, false);
         final TextView textView = root.findViewById(R.id.text_profile_student);
         profileViewModelStudent.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
+                profileImage=root.findViewById(R.id.student_profile_imageView);
+                navprofileImage=root.findViewById(R.id.imageViewStudent);
             }
         });
+
+
         selectImage=root.findViewById(R.id.student_profile_floatingActionButton);
         selectImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,10 +119,13 @@ public class ProfileFragmentStudent extends Fragment {
             if (data != null) {
                 Uri contentURI = data.getData();
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), contentURI);
+                    Bitmap imgbitmap = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), contentURI);
 
                     Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();
-                    profileImage.setImageBitmap(bitmap);
+                    profileImage.setImageBitmap(imgbitmap);
+            //        navprofileImage.setImageBitmap(imgbitmap);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    imgbitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -124,7 +136,7 @@ public class ProfileFragmentStudent extends Fragment {
         } else if (requestCode == CAMERA && resultCode==RESULT_OK) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             profileImage.setImageBitmap(thumbnail);
-
+//            navprofileImage.setImageBitmap(thumbnail);
             Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();
         }
     }

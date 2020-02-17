@@ -47,7 +47,7 @@ public class ProfileFragmentRecruiter extends Fragment {
                 textView.setText(s);
             }
         });
-
+        profileImage=root.findViewById(R.id.recruiter_profile_imageView);
         selectImage=root.findViewById(R.id.recruiter_profile_floatingActionButton);
         selectImage.setOnClickListener(new View.OnClickListener() {
             @Override

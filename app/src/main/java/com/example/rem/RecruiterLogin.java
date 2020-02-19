@@ -15,6 +15,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 import static com.google.firebase.auth.FirebaseAuth.*;
 
@@ -25,18 +32,44 @@ public class RecruiterLogin extends AppCompatActivity {
     private TextView Recruiter_signup;
     private FirebaseAuth firebaseAuth;
     private TextView forgot_password;
+    private FirebaseDatabase database;
+    private DatabaseReference rootRef, userRef, useridRef;
+    private String userEmail, sameEmail, loginEmail;
 
-    //for one time login
+    //for one time login and verifying recruiter only
 
-    FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
+    final AuthStateListener authStateListener = new AuthStateListener() {
         @Override
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
             if (firebaseUser != null) {
-                Intent intent = new Intent(getApplicationContext(), RecruiterNavigation.class);
-                startActivity(intent);
-                finish();
+                String userid=firebaseUser.getUid();
+                userEmail = firebaseUser.getEmail();
+                userRef=rootRef.child("recruiter");
+                useridRef = userRef.child(userid);
+                useridRef.child("username").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        sameEmail = (String) dataSnapshot.getValue();
+                        if (Objects.equals(userEmail, sameEmail)) {
+                            Intent intent = new Intent(getApplicationContext(), RecruiterNavigation.class);
+                            startActivity(intent);
+                            finish();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // error message
+                    }
+                });
             }
+            else{
+                    Toast.makeText(RecruiterLogin.this, "Please Sign IN", Toast.LENGTH_SHORT).show();
+                }
+
         }
     };
     @Override
@@ -52,6 +85,8 @@ public class RecruiterLogin extends AppCompatActivity {
         progressBar=findViewById(R.id.recruiter_progressBar);
         forgot_password=(TextView)findViewById(R.id.recruiter_login_forgot);
         firebaseAuth= getInstance();
+        database = FirebaseDatabase.getInstance();
+        rootRef = database.getReference();
 
 
         btn_recruiter_Login.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +118,28 @@ public class RecruiterLogin extends AppCompatActivity {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
                                     if(firebaseAuth.getCurrentUser().isEmailVerified()){
-                                        startActivity(new Intent(RecruiterLogin.this,RecruiterNavigation.class));
+                                        String userid =firebaseAuth.getCurrentUser().getUid();
+                                        userRef=rootRef.child("recruiter");
+                                        useridRef = userRef.child(userid);
+                                        useridRef.child("username");
+                                        useridRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                loginEmail = (String) dataSnapshot.getValue();
+                                                if(Objects.equals(email,loginEmail)){
+                                                    startActivity(new Intent(RecruiterLogin.this,RecruiterNavigation.class));
+                                                }
+                                                else{
+                                                    Toast.makeText(RecruiterLogin.this, "Please login using a Recruiter account only ", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                //error message
+                                            }
+                                        });
+
 
                                     }else{
                                         Toast.makeText(RecruiterLogin.this,"Please verify your email address",Toast.LENGTH_SHORT).show();
@@ -103,12 +159,14 @@ public class RecruiterLogin extends AppCompatActivity {
         Recruiter_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 startActivity(new Intent(getApplicationContext(),RecruiterRegister.class));
             }
         });
          forgot_password.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
+                 finish();
                  startActivity(new Intent(getApplicationContext(),recruiter_password.class));
              }
          });

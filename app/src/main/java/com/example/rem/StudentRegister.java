@@ -14,12 +14,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class StudentRegister extends AppCompatActivity {
     EditText txtUser,txtEmail,txtPassword,txtRetypePassword;
     ProgressBar progressBar;
     private TextView tvSignUp;
     private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase database;
+    private DatabaseReference rootRef, userRef, useridRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +39,13 @@ public class StudentRegister extends AppCompatActivity {
         tvSignUp=findViewById(R.id.student_register_Signup);
         progressBar=findViewById(R.id.student_progressBar);
         firebaseAuth=FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        rootRef = database.getReference();
+        userRef = rootRef.child("student");
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                                            String username=txtUser.getText().toString().trim();
+                                           final String username=txtUser.getText().toString().trim();
                                             String email =txtEmail.getText().toString().trim();
                                             String password=txtPassword.getText().toString().trim();
                                             String confirmPassword=txtRetypePassword.getText().toString().trim();
@@ -80,6 +87,9 @@ public class StudentRegister extends AppCompatActivity {
                                                                                 txtEmail.setText("");
                                                                                 txtPassword.setText("");
                                                                                 txtRetypePassword.setText("");
+                                                                                String userId = firebaseAuth.getCurrentUser().getUid();
+                                                                                useridRef = userRef.child(userId);
+                                                                                useridRef.child("username").setValue(username);
                                                                             }else{
                                                                                 Toast.makeText(StudentRegister.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                                                             }

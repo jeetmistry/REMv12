@@ -25,8 +25,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.rem.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -43,7 +48,7 @@ public class ProfileFragmentStudent extends Fragment {
     private ImageView navprofileImage;
     private FloatingActionButton selectImage ;
     private int GALLERY = 1 , CAMERA = 2;
-    FirebaseStorage storage = FirebaseStorage.getInstance();
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -70,7 +75,7 @@ public class ProfileFragmentStudent extends Fragment {
         });
         return root;
     }
-    //FUNCTION FOR CTAKING PHOTO FROM CAMERA INTENT
+    //FUNCTION FOR TAKING PHOTO FROM CAMERA INTENT
     private void takePhotoFromCamera() {
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, CAMERA);
@@ -123,10 +128,6 @@ public class ProfileFragmentStudent extends Fragment {
 
                     Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();
                     profileImage.setImageBitmap(imgbitmap);
-            //        navprofileImage.setImageBitmap(imgbitmap);
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    imgbitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-
                 } catch (IOException e) {
                     e.printStackTrace();
                     Toast.makeText(getActivity(), "Failed!", Toast.LENGTH_SHORT).show();
@@ -136,7 +137,6 @@ public class ProfileFragmentStudent extends Fragment {
         } else if (requestCode == CAMERA && resultCode==RESULT_OK) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             profileImage.setImageBitmap(thumbnail);
-//            navprofileImage.setImageBitmap(thumbnail);
             Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();
         }
     }

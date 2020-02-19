@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.rem.LoginOption;
 import com.example.rem.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LogoutFragmentStudent extends Fragment {
 
@@ -25,6 +26,7 @@ public class LogoutFragmentStudent extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         logoutViewModelStudent =
                 ViewModelProviders.of(this).get(LogoutViewModelStudent.class);
+        FirebaseAuth.getInstance().signOut();
         Intent logout = new Intent(getActivity(), LoginOption.class);
         Toast.makeText(getActivity(),"Logging Out From Student ...",Toast.LENGTH_SHORT).show();
         startActivity(logout);

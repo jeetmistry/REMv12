@@ -130,7 +130,12 @@ public class RecruiterLogin extends AppCompatActivity {
                                                     startActivity(new Intent(RecruiterLogin.this,RecruiterNavigation.class));
                                                 }
                                                 else{
+                                                    FirebaseAuth.getInstance().signOut();
                                                     Toast.makeText(RecruiterLogin.this, "Please login using a Recruiter account only ", Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                    startActivity(new Intent(RecruiterLogin.this,RecruiterLogin.class));
+
+                                                    ;
                                                 }
                                             }
 

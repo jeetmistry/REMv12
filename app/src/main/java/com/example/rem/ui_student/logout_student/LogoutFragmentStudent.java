@@ -28,7 +28,7 @@ public class LogoutFragmentStudent extends Fragment {
                 ViewModelProviders.of(this).get(LogoutViewModelStudent.class);
         FirebaseAuth.getInstance().signOut();
         Intent logout = new Intent(getActivity(), LoginOption.class);
-        Toast.makeText(getActivity(),"Logging Out From Student ...",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"Logging Out From Student",Toast.LENGTH_SHORT).show();
         startActivity(logout);
           View root = inflater.inflate(R.layout.fragment_jobs_student, container, false);
 

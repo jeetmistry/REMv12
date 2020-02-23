@@ -130,7 +130,10 @@ public class StudentLogin extends AppCompatActivity {
                                                 if (Objects.equals(email, loginEmail)) {
                                                     startActivity(new Intent(StudentLogin.this, StudentNavigation.class));
                                                 } else {
+                                                    FirebaseAuth.getInstance().signOut();
                                                     Toast.makeText(StudentLogin.this, "Please login using a Student account only ", Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                    startActivity(new Intent(StudentLogin.this,StudentLogin.class));
                                                 }
                                             }
 
@@ -141,6 +144,7 @@ public class StudentLogin extends AppCompatActivity {
                                         });
                                     }else{
                                         Toast.makeText(StudentLogin.this,"Please verify your email address",Toast.LENGTH_SHORT).show();
+
 
                                     }
                                 } else {

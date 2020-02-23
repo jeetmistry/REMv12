@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.example.rem.R;
+
 
 import static java.lang.System.exit;
 

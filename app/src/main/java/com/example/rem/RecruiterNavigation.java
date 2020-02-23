@@ -79,4 +79,9 @@ public class RecruiterNavigation extends AppCompatActivity {
         }
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        //does nothing
+    }
 }

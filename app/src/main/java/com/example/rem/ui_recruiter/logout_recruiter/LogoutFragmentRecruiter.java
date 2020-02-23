@@ -19,7 +19,7 @@ public class LogoutFragmentRecruiter extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         FirebaseAuth.getInstance().signOut();
         Intent logout = new Intent(getActivity(), LoginOption.class);
-        Toast.makeText(getActivity(), "Logging Out From Recruiter ...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Logging Out From Recruiter", Toast.LENGTH_SHORT).show();
         startActivity(logout);
         return inflater.inflate(R.layout.fragment_home_recruiter, container, false);
     }

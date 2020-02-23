@@ -45,4 +45,5 @@
         android:name="com.example.rem.ui_student.logout_student.LogoutFragmentStudent"
         android:label="@string/menu_logout_student"
         />
+
 </navigation>

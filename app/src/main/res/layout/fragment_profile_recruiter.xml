@@ -214,13 +214,18 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true">
 
-                <ImageView
+                <com.mikhaellopez.circularimageview.CircularImageView
                     android:id="@+id/recruiter_profile_imageView"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/recruter"
+                    app:civ_border_color="#000000"
+                    app:civ_border_width="5dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_color="#000000"
+                    app:civ_shadow_radius="10dp"
                     />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton

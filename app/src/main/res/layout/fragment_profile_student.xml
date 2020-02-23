@@ -52,27 +52,28 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="Profile Details"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlue"/>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorBlue">
+                        android:textColorHint="#000000">
 
                         <EditText
+                            android:id="@+id/student_profile_username"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/student_profile_username"
-                            android:hint="Please Enter Full Name"
+                            android:hint="Full Name"
                             android:imeOptions="actionNext"
-                            android:textColorHint="@color/colorBlue" />
+                            android:textColorHint="#000000" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorBlue">
+                        android:textColorHint="#000000">
 
                         <EditText
                             android:layout_width="match_parent"
@@ -81,7 +82,7 @@
                             android:id="@+id/student_profile_email"
                             android:imeOptions="actionNext"
                             android:inputType="textEmailAddress"
-                            android:textColorHint="@color/colorBlue" />
+                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,13 +90,13 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorBlue">
+                        android:textColorHint="#000000">
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/student_profile_password"
-                            android:hint="password"
+                            android:id="@+id/student_profile_phonenumber"
+                            android:hint="Password"
                             android:imeOptions="actionNext"
                             android:inputType="textPassword"
                             android:textColorHint="@color/colorBlue" />
@@ -107,17 +108,18 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="Qualification"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlue"/>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorBlue">
+                        android:textColorHint="#000000">
 
                         <EditText
+                            android:id="@+id/student_profile_qualification"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/student_profile_qualification"
                             android:hint="Enter your Qualification"
                             android:imeOptions="actionNext"
                             android:textColorHint="@color/colorBlue" />
@@ -127,7 +129,39 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorBlue">
+                        android:textColorHint="#000000">
+
+                        <EditText
+                            android:id="@+id/student_profile_collegename"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Enter your College Name"
+                            android:imeOptions="actionNext"
+                            android:textColorHint="@color/colorBlue" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#000000"
+                        android:hint="@string/student_courses">
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="50sp"
+                            android:id="@+id/student_spinner_course"
+                            android:entries="@array/student_courses_array"
+                            android:prompt="@string/student_courses"
+
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#000000">
 
                         <EditText
                             android:layout_width="match_parent"
@@ -135,7 +169,7 @@
                             android:id="@+id/student_profile_passing_year"
                             android:hint="Enter Passing Year"
                             android:imeOptions="actionNext"
-                            android:textColorHint="@color/colorBlue" />
+                            />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -150,7 +184,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="Fields of Interest"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:textColor="@color/colorBlue"/>
 
                         <CheckBox
                             android:id="@+id/student_checkbox_IT"
@@ -158,7 +193,7 @@
                             android:layout_height="wrap_content"
                             android:imeOptions="actionNext"
                             android:text="IT"
-                            android:textColor="@color/colorBlue" />
+                            android:textColor="#000000" />
 
                         <CheckBox
                             android:id="@+id/student_checkbox_CO"
@@ -166,7 +201,7 @@
                             android:layout_height="wrap_content"
                             android:imeOptions="actionNext"
                             android:text="Computer Engineering"
-                            android:textColor="@color/colorBlue" />
+                            android:textColor="#000000" />
 
                         <CheckBox
                             android:id="@+id/student_checkbox_CS"
@@ -174,7 +209,7 @@
                             android:layout_height="wrap_content"
                             android:imeOptions="actionNext"
                             android:text="Computer Science"
-                            android:textColor="@color/colorBlue" />
+                            android:textColor="#000000" />
 
                         <CheckBox
                             android:id="@+id/student_checkbox_ME"
@@ -182,7 +217,7 @@
                             android:layout_height="wrap_content"
                             android:imeOptions="actionNext"
                             android:text="Mechanical Engineering"
-                            android:textColor="@color/colorBlue" />
+                            android:textColor="#000000" />
 
                         <CheckBox
                             android:id="@+id/srudent_checkbox_Civil"
@@ -190,7 +225,7 @@
                             android:layout_height="wrap_content"
                             android:imeOptions="actionNext"
                             android:text="Civil Engineering"
-                            android:textColor="@color/colorBlue" />
+                            android:textColor="#000000" />
 
                         <CheckBox
                             android:id="@+id/student_checkbox_Chemical"
@@ -198,7 +233,7 @@
                             android:layout_height="wrap_content"
                             android:imeOptions="actionNext"
                             android:text="Chemical Engineering"
-                            android:textColor="@color/colorBlue" />
+                            android:textColor="#000000" />
 
                         <CheckBox
                             android:id="@+id/student_checkbox_Civilcheckbox_Auto"
@@ -206,7 +241,7 @@
                             android:layout_height="wrap_content"
                             android:imeOptions="actionNext"
                             android:text="Automobile Engineering"
-                            android:textColor="@color/colorBlue" />
+                            android:textColor="#000000" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -230,13 +265,18 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true">
 
-                <ImageView
+                <com.mikhaellopez.circularimageview.CircularImageView
                     android:id="@+id/student_profile_imageView"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/student"
+                    app:civ_border_color="#000000"
+                    app:civ_border_width="5dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_color="#000000"
+                    app:civ_shadow_radius="10dp"
                     />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton

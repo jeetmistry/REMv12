@@ -21,6 +21,14 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_margin="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorBlue"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2mm">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -78,15 +86,13 @@
             android:layout_height="wrap_content"
             android:textColorHint="#000000">
 
-            <Spinner
-                android:id="@+id/recruiter_addjobs_workingtype"
+            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="40sp"
-                android:entries="@array/recruiter_workingtype_array"
-                android:prompt="@string/recruiter_workingtype"
-                >
-
-            </Spinner>
+                android:layout_height="wrap_content"
+                android:id="@+id/recruiter_addjobs_worktype"
+                android:hint="Work from home / workplace"
+                android:imeOptions="actionNext"
+                android:textColorHint="@color/colorBlue" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,8 +103,11 @@
             android:layout_gravity="center"
             android:background="@drawable/button"
             android:text="Add Job"
-            android:layout_marginTop="40dp"/>
+            android:textColor="#ffffff"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"/>
     </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </ScrollView>
 
 

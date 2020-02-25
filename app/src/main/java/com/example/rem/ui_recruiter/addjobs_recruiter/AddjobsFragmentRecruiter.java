@@ -27,14 +27,15 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class AddjobsFragmentRecruiter extends Fragment {
 
-
+    // declaring variables
     EditText companyName;
     EditText companyDescription;
-    EditText jobPost;
+    EditText jobPost,workType;
     String workingType,companyname,companydescription,jobpost;
-    Spinner workingTypeSpinner;
     String userid;
     Button submitPost;
+
+    //declaring database variables
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference rootRef,userRef,userIdRef,jobref;
@@ -46,14 +47,17 @@ public class AddjobsFragmentRecruiter extends Fragment {
                 ViewModelProviders.of(this).get(AddjobsViewModelRecruiter.class);
         View root = inflater.inflate(R.layout.fragment_addjobs_recruiter, container, false);
         final TextView textView = root.findViewById(R.id.text_addjobs_recruiter);
+
+        //initializing variables
         companyName = root.findViewById(R.id.recruiter_addjobs_companyname);
         companyDescription = root.findViewById(R.id.recruiter_addjobs_companydescription);
         jobPost = root.findViewById(R.id.recruiter_addjobs_jobpost);
-        workingTypeSpinner = root.findViewById(R.id.recruiter_addjobs_workingtype);
+        workType = root.findViewById(R.id.recruiter_addjobs_worktype);
         submitPost = root.findViewById(R.id.recruiter_addjobs_addjob);
+
+        //initializing database variables
         firebaseAuth = FirebaseAuth.getInstance();
         userid = firebaseAuth.getCurrentUser().getUid();
-
         firebaseDatabase = FirebaseDatabase.getInstance();
         rootRef = firebaseDatabase.getReference();
         userRef=rootRef.child("recruiter");
@@ -67,11 +71,9 @@ public class AddjobsFragmentRecruiter extends Fragment {
                 companyname = companyName.getText().toString();
                 companydescription = companyDescription.getText().toString();
                 jobpost = jobPost.getText().toString();
+                workingType = workType.getText().toString();
 
-                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.recruiter_workingtype_array,
-                        android.R.layout.simple_spinner_item);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                workingTypeSpinner.setAdapter(adapter);
+                // validating not empty EditText
                 if (TextUtils.isEmpty(companyname)) {
                     Toast.makeText(getContext(), "Please enter Company Name", Toast.LENGTH_SHORT).show();
                     return;
@@ -84,29 +86,16 @@ public class AddjobsFragmentRecruiter extends Fragment {
                     Toast.makeText(getContext(), "Please enter Job Post", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                jobref = userIdRef.child("Jobs").child(jobpost);
+                if (TextUtils.isEmpty(workingType)) {
+                    Toast.makeText(getContext(), "Please enter Work Type", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                workingTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        String wt;
-                        if (position == 0) {
-                            Toast.makeText(getContext(), "Select a Working Type", Toast.LENGTH_SHORT).show();
-                            return;
-                        } else {
-                            wt = parent.getItemAtPosition(position).toString();
-                            workingType = wt;
-                        }
-                    }
+                //creating unique id for a particular job
+                jobref = userIdRef.child("Jobs").push();
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-                        workingTypeSpinner.requestFocus();
-                        Toast.makeText(getContext(), "Select a working type", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                });
-                if (!TextUtils.isEmpty(companyname) && !TextUtils.isEmpty(companydescription) && !TextUtils.isEmpty(jobpost)) {
+                //storing the jo in database
+                if (!TextUtils.isEmpty(companyname) && !TextUtils.isEmpty(companydescription) && !TextUtils.isEmpty(jobpost) && !TextUtils.isEmpty(workingType)) {
                     jobref.child("Company Name").setValue(companyname);
                     jobref.child("Company Description").setValue(companydescription);
                     jobref.child("Job Post").setValue(jobpost);
@@ -115,6 +104,7 @@ public class AddjobsFragmentRecruiter extends Fragment {
                     jobPost.setText("");
                     companyName.setText("");
                     companyDescription.setText("");
+                    workType.setText("");
 
                 }
                 else{
@@ -122,6 +112,8 @@ public class AddjobsFragmentRecruiter extends Fragment {
                 }
             }
         });
+
+        //viewmodel code
         addjobsViewModelRecruiter.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

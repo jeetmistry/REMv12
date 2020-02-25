@@ -15,5 +15,91 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#000000"
+            android:layout_marginTop="20dp"
+            >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recruiter_addjobs_companyname"
+            android:hint="Company Name"
+            android:imeOptions="actionNext"
+            android:textColorHint="@color/colorBlue" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#000000">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recruiter_addjobs_companydescription"
+                    android:hint="Company Description"
+                    android:imeOptions="actionNext"
+                    android:textColorHint="@color/colorBlue" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#000000">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recruiter_addjobs_jobpost"
+            android:hint="Job Post"
+            android:imeOptions="actionNext"
+            android:textColorHint="@color/colorBlue" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#000000">
+
+            <Spinner
+                android:id="@+id/recruiter_addjobs_workingtype"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:entries="@array/recruiter_workingtype_array"
+                android:prompt="@string/recruiter_workingtype"
+                >
+
+            </Spinner>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/recruiter_addjobs_addjob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/button"
+            android:text="Add Job"
+            android:layout_marginTop="40dp"/>
+    </LinearLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

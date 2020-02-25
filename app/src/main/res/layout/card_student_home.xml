@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <androidx.cardview.widget.CardView
+        android:id="@+id/student_home_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2mm"
+        android:layout_margin="15dp"
+        android:background="@color/colorBlue">
+
+        <TextView
+            android:id="@+id/student_home_card_jobpost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Job Post"
+            android:textSize="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TextView
+        android:id="@+id/student_home_card_companyname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Company Name"
+        android:textSize="20dp"
+            android:layout_marginLeft="5dp"
+        android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/student_home_card_companydescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="Company Description"
+            android:textSize="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="10dp"/>
+        <Button
+            android:id="@+id/student_home_card_btnapply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apply"
+            android:background="@drawable/button"
+            android:layout_gravity="bottom"
+
+            android:layout_marginBottom="30dp"/>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

@@ -96,7 +96,22 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/student_profile_phonenumber"
-                            android:hint="Password"
+                            android:hint="Phone Number"
+                            android:imeOptions="actionNext"
+                            android:inputType="textPassword"
+                            android:textColorHint="@color/colorBlue" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#000000">
+
+                        <EditText
+                            android:id="@+id/student_profile_city"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="City"
                             android:imeOptions="actionNext"
                             android:inputType="textPassword"
                             android:textColorHint="@color/colorBlue" />

@@ -63,6 +63,15 @@
         <item>Rubber Technology</item>
     </string-array>
 
+    <string name="recruiter_workingtype">Select Working Type</string>
+    <string-array name="recruiter_workingtype_array">
+        <item>Select Working Type</item>
+        <item>Work From Home</item>
+        <item>Workplace</item>
+
+
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

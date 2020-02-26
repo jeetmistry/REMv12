@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.rem.Model.ViewJobsRecruiter;
 import com.example.rem.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -96,11 +97,8 @@ public class AddjobsFragmentRecruiter extends Fragment {
 
                 //storing the jo in database
                 if (!TextUtils.isEmpty(companyname) && !TextUtils.isEmpty(companydescription) && !TextUtils.isEmpty(jobpost) && !TextUtils.isEmpty(workingType)) {
-                    jobref.child("Company Name").setValue(companyname);
-                    jobref.child("Company Description").setValue(companydescription);
-                    jobref.child("Job Post").setValue(jobpost);
-                    jobref.child("Working Type").setValue(workingType);
-
+                    ViewJobsRecruiter vjr = new ViewJobsRecruiter(companyname,companydescription,jobpost,workingType);
+                    jobref.setValue(vjr);
                     jobPost.setText("");
                     companyName.setText("");
                     companyDescription.setText("");

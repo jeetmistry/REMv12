@@ -10,6 +10,7 @@ import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -25,7 +26,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 
 public class AdminNavigation extends AppCompatActivity {
-
+    private DrawerLayout admin_drawer_layout;
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -34,6 +35,16 @@ public class AdminNavigation extends AppCompatActivity {
         setContentView(R.layout.activity_admin_navigation);
         Toolbar toolbar = findViewById(R.id.toolbar_recruiter);
         setSupportActionBar(toolbar);
+
+        admin_drawer_layout=findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(
+                this,admin_drawer_layout,toolbar,
+                R.string.navigation_drawer_open_student,
+                R.string.navigation_drawer_close_student
+        );
+
+        admin_drawer_layout.addDrawerListener(toggle);
+        toggle.syncState();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

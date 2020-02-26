@@ -1,4 +1,4 @@
-package com.example.rem;
+package com.example.rem.Model;
 
 public class Model {
     private int image;

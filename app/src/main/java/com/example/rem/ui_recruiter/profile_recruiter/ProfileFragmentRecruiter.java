@@ -81,7 +81,7 @@ public class ProfileFragmentRecruiter extends Fragment {
                 userRef=rootRef.child("recruiter");
                 String userId= firebaseAuth.getCurrentUser().getUid().toString();
                 userIdRef=userRef.child(userId);
-                profileRef=userIdRef.child("profile");
+                profileRef = userIdRef.child("profile");
 
 
             }

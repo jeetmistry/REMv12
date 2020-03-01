@@ -94,7 +94,7 @@ public class ProfileFragmentStudent extends Fragment {
 
                 profileImage=root.findViewById(R.id.student_profile_imageView);
                 navprofileImage=root.findViewById(R.id.imageViewStudent);
-                saveProfile = (Button)root.findViewById(R.id.student_profile_resumesavebutton);
+               // saveProfile = (Button)root.findViewById(R.id.student_profile_resumesavebutton);
                 firebaseAuth = FirebaseAuth.getInstance();
                 firebaseUser = firebaseAuth.getCurrentUser();
                 firebaseStorage = FirebaseStorage.getInstance();
@@ -104,24 +104,24 @@ public class ProfileFragmentStudent extends Fragment {
                 useridReference = userReference.child(userid+"/");
                 StorageReference ProfileRef=useridReference.child("profile");
 
-                saveProfile.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        useridReference.child("Images/").putFile(contentURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Toast.makeText(getContext(), "Profile Uploaded", Toast.LENGTH_SHORT).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                String ee= e.toString();
-                                Toast.makeText(getActivity(), ee, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-                    }
-                });
+//                saveProfile.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        useridReference.child("Images/").putFile(contentURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                            @Override
+//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                                Toast.makeText(getContext(), "Profile Uploaded", Toast.LENGTH_SHORT).show();
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                String ee= e.toString();
+//                                Toast.makeText(getActivity(), ee, Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//
+//                    }
+//                });
 
             }
         });
@@ -140,7 +140,7 @@ public class ProfileFragmentStudent extends Fragment {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         rootRef = firebaseDatabase.getReference();
-        userRef=rootRef.child("recruiter");
+        userRef=rootRef.child("student");
         String userId= firebaseAuth.getCurrentUser().getUid().toString();
         userIdRef=userRef.child(userId);
         profileRef=userIdRef.child("profile");
@@ -157,6 +157,7 @@ public class ProfileFragmentStudent extends Fragment {
                 qualification=student_profile_qualification.getText().toString();
                 collegeName=student_profile_collegename.getText().toString();
                 passingYear=student_profile_passing_year.getText().toString();
+
                 if(TextUtils.isEmpty(name)){
                     Toast.makeText(getContext(), "Please enter Full name", Toast.LENGTH_SHORT).show();
                     return;
@@ -188,7 +189,7 @@ public class ProfileFragmentStudent extends Fragment {
                 }
 
                StoreStudentProfile ssp = new StoreStudentProfile(name,email,phone,city,qualification,collegeName,passingYear);
-               profileRef.setValue.(ssp).addOnSuccessListener(new OnSuccessListener<Void>() {
+               profileRef.setValue(ssp).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(getContext(), "Profile Saved Succesfully", Toast.LENGTH_SHORT).show();

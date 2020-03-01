@@ -50,7 +50,7 @@ public class StudentLogin extends AppCompatActivity {
                 userRef=rootRef.child("student");
                 useridRef = userRef.child(userid);
 
-                useridRef.child("username").addListenerForSingleValueEvent(new ValueEventListener() {
+                useridRef.child("username").child("username").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         sameEmail = (String) dataSnapshot.getValue();
@@ -122,7 +122,7 @@ public class StudentLogin extends AppCompatActivity {
                                         String userid = mAuth.getCurrentUser().getUid();
                                         userRef = rootRef.child("student");
                                         useridRef = userRef.child(userid);
-                                        useridRef.child("username");
+                                        useridRef.child("username").child("username");
                                         useridRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

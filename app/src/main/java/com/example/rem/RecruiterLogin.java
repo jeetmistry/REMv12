@@ -48,7 +48,7 @@ public class RecruiterLogin extends AppCompatActivity {
                 userEmail = firebaseUser.getEmail();
                 userRef=rootRef.child("recruiter");
                 useridRef = userRef.child(userid);
-                useridRef.child("username").addListenerForSingleValueEvent(new ValueEventListener() {
+                useridRef.child("username").child("username").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         sameEmail = (String) dataSnapshot.getValue();
@@ -121,7 +121,7 @@ public class RecruiterLogin extends AppCompatActivity {
                                         String userid =firebaseAuth.getCurrentUser().getUid();
                                         userRef=rootRef.child("recruiter");
                                         useridRef = userRef.child(userid);
-                                        useridRef.child("username");
+                                        useridRef.child("username").child("username");
                                         useridRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

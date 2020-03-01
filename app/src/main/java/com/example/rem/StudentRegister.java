@@ -89,7 +89,7 @@ public class StudentRegister extends AppCompatActivity {
                                                                                 txtRetypePassword.setText("");
                                                                                 String userId = firebaseAuth.getCurrentUser().getUid();
                                                                                 useridRef = userRef.child(userId);
-                                                                                useridRef.child("username").setValue(username);
+                                                                                useridRef.child("username").child("username").setValue(username);
                                                                             }else{
                                                                                 Toast.makeText(StudentRegister.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                                                             }

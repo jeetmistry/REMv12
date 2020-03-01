@@ -92,13 +92,13 @@ public class RecruiterRegister extends AppCompatActivity {
                                                                                 txtRetypePassword.setText("");
                                                                                 String userId = firebaseAuth.getCurrentUser().getUid();
                                                                                 useridRef = userRef.child(userId);
-                                                                                useridRef.child("username").setValue(username);
+                                                                                useridRef.child("username").child("username").setValue(username);
+                                                                                startActivity(new Intent(RecruiterRegister.this,RecruiterLogin.class));
                                                                             }else{
                                                                                 Toast.makeText(RecruiterRegister.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                                                             }
                                                                         }
                                                                     });
-                                                                    startActivity(new Intent(getApplicationContext(),RecruiterNavigation.class));
 
                                                                 } else {
                                                                     Toast.makeText(RecruiterRegister.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();

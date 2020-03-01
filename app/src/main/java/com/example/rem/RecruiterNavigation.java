@@ -17,6 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -24,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.TextView;
 
 public class RecruiterNavigation extends AppCompatActivity {
     private DrawerLayout recruiter_drawer_layout;
@@ -45,14 +47,7 @@ public class RecruiterNavigation extends AppCompatActivity {
        recruiter_drawer_layout.addDrawerListener(toggle);
         toggle.syncState();
 
-        FloatingActionButton fab = findViewById(R.id.fab_recruiter);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view_admin);
         // Passing each menu ID as a set of Ids because each

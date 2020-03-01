@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/nav_viewstudents_admin"
-        android:name="com.example.rem.ui_admin.viewstudents_admin.ViewstudentsFragment"
+        android:name="com.example.rem.ui_admin.viewstudents_admin.ViewstudentsFragmentAdmin"
         android:label="@string/menu_viewstudents_admin"
         tools:layout="@layout/fragment_viewstudent_admin" />
 

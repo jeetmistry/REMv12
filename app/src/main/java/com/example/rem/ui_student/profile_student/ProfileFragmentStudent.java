@@ -60,8 +60,8 @@ public class ProfileFragmentStudent extends Fragment {
     private String profileName;
     private String userid;
     private Button saveProfile;
-    FirebaseDatabase database;
-    DatabaseReference ProfileRef,storageRef, userReference;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference profileRef,rootRef, userRef,userIdRef;
     Uri contentURI;
     EditText student_profile_username;
     EditText student_profile_email;
@@ -188,7 +188,7 @@ public class ProfileFragmentStudent extends Fragment {
                 }
 
                StoreStudentProfile ssp = new StoreStudentProfile(name,email,phone,city,qualification,collegeName,passingYear);
-               ProfileRef.setValue.(ssp).addOnSuccessListener(new OnSuccessListener<Void>() {
+               profileRef.setValue.(ssp).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(getContext(), "Profile Saved Succesfully", Toast.LENGTH_SHORT).show();

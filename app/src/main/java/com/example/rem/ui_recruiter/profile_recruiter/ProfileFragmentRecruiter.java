@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.renderscript.Sampler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +26,6 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.rem.Model.StoreRecruiterProfile;
 import com.example.rem.R;
 
-import com.example.rem.ui_recruiter.profile_recruiter.ProfileViewModelRecruiter;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -128,6 +126,7 @@ public class ProfileFragmentRecruiter extends Fragment {
                     Toast.makeText(getContext(), "Please enter company location", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 StoreRecruiterProfile srp = new StoreRecruiterProfile(name,email,phone,companyName,companyLocation);
                 profileRef.setValue(srp).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

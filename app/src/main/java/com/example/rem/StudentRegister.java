@@ -95,7 +95,7 @@ public class StudentRegister extends AppCompatActivity {
                                                                             }
                                                                         }
                                                                     });
-                                                                    startActivity(new Intent(getApplicationContext(),RecruiterNavigation.class));
+                                                                    startActivity(new Intent(getApplicationContext(),StudentNavigation.class));
 
                                                                 } else {
                                                                     Toast.makeText(StudentRegister.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();

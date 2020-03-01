@@ -92,10 +92,10 @@
                         android:textColorHint="@color/colorBlue">
 
                         <EditText
+                            android:id="@+id/recruiter_profile_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/recruiter_profile_password"
-                            android:hint="password"
+                            android:hint="phone Number"
                             android:imeOptions="actionNext"
                             android:inputType="textPassword"
                             android:textColorHint="@color/colorBlue" />
@@ -132,7 +132,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/student_profile_company_location"
+                            android:id="@+id/recruiter_profile_company_location"
                             android:hint="Enter Company Location"
                             android:imeOptions="actionNext"
                             android:textColorHint="@color/colorBlue" />

@@ -18,5 +18,6 @@ public class AdminViewCompanyViewHolder extends RecyclerView.ViewHolder{
         phone = itemView.findViewById(R.id.admin_viewcompany_card_phone);
         companyname = itemView.findViewById(R.id.admin_viewcompany_card_companyname);
         companylocation = itemView.findViewById(R.id.admin_viewcompany_card_companyloaction);
+
     }
 }

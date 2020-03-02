@@ -69,7 +69,8 @@ public class ViewstudentsFragmentAdmin extends Fragment {
                                 snapshot.child("profile").child("city").getValue().toString(),
                                 snapshot.child("profile").child("qualification").getValue().toString(),
                                 snapshot.child("profile").child("collegeName").getValue().toString(),
-                                snapshot.child("profile").child("passingYear").getValue().toString());
+                                snapshot.child("profile").child("passingYear").getValue().toString(),
+                                snapshot.child("profile").child("fields").getValue().toString());
                     }
                 })
                 .build();

@@ -63,9 +63,13 @@ public class ViewcompaniesFragmentAdmin extends Fragment {
                     @NonNull
                     @Override
                     public StoreRecruiterProfile parseSnapshot(@NonNull DataSnapshot snapshot) {
-                        return new StoreRecruiterProfile(snapshot.child("profile").child("fullname").getValue().toString()
-                        ,snapshot.child("profile").child("email").getValue().toString(),snapshot.child("profile").child("phone").getValue().toString()
-                        ,snapshot.child("profile").child("companyname").getValue().toString(),snapshot.child("profile").child("companylocation").getValue().toString());
+                        return new StoreRecruiterProfile(snapshot.child("profile").child("fullname").getValue().toString(),
+                                snapshot.child("profile").child("email").getValue().toString(),
+                                snapshot.child("profile").child("phone").getValue().toString(),
+                                snapshot.child("profile").child("companyname").getValue().toString(),
+                                snapshot.child("profile").child("companylocation").getValue().toString(),
+                                snapshot.child("profile").child("fieldsOfWork").getValue().toString()
+                        );
                     }
                 })
                 .build();
@@ -78,6 +82,7 @@ public class ViewcompaniesFragmentAdmin extends Fragment {
                 adminViewCompanyViewHolder.phone.setText("Phone : "+storeRecruiterProfile.getPhone());
                 adminViewCompanyViewHolder.companyname.setText("Company Name : "+storeRecruiterProfile.getCompanyname());
                 adminViewCompanyViewHolder.companylocation.setText("Company Location : "+storeRecruiterProfile.getCompanylocation());
+
 
             }
 

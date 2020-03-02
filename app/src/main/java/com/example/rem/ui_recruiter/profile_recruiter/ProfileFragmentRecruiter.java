@@ -49,6 +49,7 @@ public class ProfileFragmentRecruiter extends Fragment {
     EditText recruiter_profile_phone;
     EditText recruiter_profile_company_name;
     EditText recruiter_profile_company_location;
+    EditText recruiter_field_of_work;
     String recruiter_userid;
     Button recruiter_profile_savebutton;
     FirebaseAuth firebaseAuth;
@@ -67,6 +68,7 @@ public class ProfileFragmentRecruiter extends Fragment {
         recruiter_profile_phone = root.findViewById(R.id.recruiter_profile_password);
         recruiter_profile_company_name = root.findViewById(R.id. recruiter_profile_company_name);
         recruiter_profile_company_location = root.findViewById(R.id.recruiter_profile_company_location);
+        recruiter_field_of_work=root.findViewById(R.id.recruiter_field_of_work);
 
 
         profileViewModelRecruiter.getText().observe(this, new Observer<String>() {
@@ -99,12 +101,13 @@ public class ProfileFragmentRecruiter extends Fragment {
         recruiter_profile_savebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name,email,phone,companyName,companyLocation;
+                String name,email,phone,companyName,companyLocation,fieldsOfWork;
                 name= recruiter_profile_name.getText().toString();
                 email=recruiter_profile_email.getText().toString();
                 phone=recruiter_profile_phone.getText().toString();
                 companyName=recruiter_profile_company_name.getText().toString();
                 companyLocation=recruiter_profile_company_location.getText().toString();
+                fieldsOfWork=recruiter_field_of_work.getText().toString();
                 if(TextUtils.isEmpty(name)){
                     Toast.makeText(getContext(), "Please enter Full name", Toast.LENGTH_SHORT).show();
                     return;
@@ -126,8 +129,12 @@ public class ProfileFragmentRecruiter extends Fragment {
                     Toast.makeText(getContext(), "Please enter company location", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if(TextUtils.isEmpty(fieldsOfWork)){
+                    Toast.makeText(getContext(), "Please enter the Fields of Work", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                StoreRecruiterProfile srp = new StoreRecruiterProfile(name,email,phone,companyName,companyLocation);
+                StoreRecruiterProfile srp = new StoreRecruiterProfile(name,email,phone,companyName,companyLocation,fieldsOfWork);
                 profileRef.setValue(srp).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

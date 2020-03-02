@@ -97,7 +97,7 @@
                             android:layout_height="wrap_content"
                             android:hint="phone Number"
                             android:imeOptions="actionNext"
-                            android:inputType="textPassword"
+                            android:inputType="text"
                             android:textColorHint="@color/colorBlue" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -143,53 +143,17 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorPrimary">
+                        android:textColorHint="@color/colorBlue">
 
-                        <TextView
+
+                        <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="Field of Work"
-                            android:textStyle="bold" />
-
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="IT"
-                            android:textColor="@color/colorBlue"
-                            android:id="@+id/recruiter_checkbox_IT"/>
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Computer Software"
-                            android:textColor="@color/colorBlue"
-                            android:id="@+id/recruiter_checkbox_CS"/>
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Artificial Intelligence"
-                            android:textColor="@color/colorBlue"
-                            android:id="@+id/recruiter_checkbox_AI"/>
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Mechanical"
-                            android:textColor="@color/colorBlue"
-                            android:id="@+id/recruiter_checkbox_ME"/>
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Civil Constructions"
-                            android:textColor="@color/colorBlue"
-                            android:id="@+id/recruiter_checkbox_civil"/>
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Chemical"
-                            android:textColor="@color/colorBlue"
-                            android:id="@+id/recruiter_checkbox_Chemical"/>
-
-
+                            android:id="@+id/recruiter_field_of_work"
+                            android:hint="Enter the Field of work"
+                            android:imeOptions="actionNext"
+                            android:textColorHint="@color/colorBlue"
+                            />
 
 
                     </com.google.android.material.textfield.TextInputLayout>

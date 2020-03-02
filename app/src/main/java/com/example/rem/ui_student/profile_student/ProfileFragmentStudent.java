@@ -70,6 +70,7 @@ public class ProfileFragmentStudent extends Fragment {
     EditText student_profile_qualification;
     EditText student_profile_collegename;
     EditText student_profile_passing_year;
+    EditText student_profile_fields;
     Button student_profile_resumesavebutton;
 
 
@@ -86,12 +87,12 @@ public class ProfileFragmentStudent extends Fragment {
         student_profile_qualification= root.findViewById(R.id. student_profile_qualification);
         student_profile_collegename= root.findViewById(R.id. student_profile_collegename);
         student_profile_passing_year= root.findViewById(R.id. student_profile_passing_year);
+        student_profile_fields=root.findViewById(R.id.student_profile_fields);
 
         profileViewModelStudent.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
-
                 profileImage=root.findViewById(R.id.student_profile_imageView);
                 navprofileImage=root.findViewById(R.id.imageViewStudent);
                // saveProfile = (Button)root.findViewById(R.id.student_profile_resumesavebutton);
@@ -149,7 +150,7 @@ public class ProfileFragmentStudent extends Fragment {
         student_profile_resumesavebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name,email,phone,city,qualification,collegeName,passingYear;
+                String name,email,phone,city,qualification,collegeName,passingYear,fields;
                 name=student_profile_username.getText().toString();
                 email=student_profile_email.getText().toString();
                 phone=student_profile_phonenumber.getText().toString();
@@ -157,6 +158,7 @@ public class ProfileFragmentStudent extends Fragment {
                 qualification=student_profile_qualification.getText().toString();
                 collegeName=student_profile_collegename.getText().toString();
                 passingYear=student_profile_passing_year.getText().toString();
+                fields=student_profile_fields.getText().toString();
 
                 if(TextUtils.isEmpty(name)){
                     Toast.makeText(getContext(), "Please enter Full name", Toast.LENGTH_SHORT).show();
@@ -187,8 +189,12 @@ public class ProfileFragmentStudent extends Fragment {
                     Toast.makeText(getContext(), "Please enter company location", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if(TextUtils.isEmpty(fields)){
+                    Toast.makeText(getContext(), "Please enter fields of Interest", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-               StoreStudentProfile ssp = new StoreStudentProfile(name,email,phone,city,qualification,collegeName,passingYear);
+               StoreStudentProfile ssp = new StoreStudentProfile(name,email,phone,city,qualification,collegeName,passingYear,fields);
                profileRef.setValue(ssp).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

@@ -34,8 +34,8 @@ public class ViewjobsFragmentRecruiter extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference rootRef,userRef,userIdRef,jobRef,perjobRef;
-    private String userid,compname,compdesc,jobpost,perjob;
+    private DatabaseReference rootRef,userRef,userIdRef,jobRef;
+    private String userid;
 
     private ViewjobsViewModelRecruiter viewjobsViewModelRecruiter;
 

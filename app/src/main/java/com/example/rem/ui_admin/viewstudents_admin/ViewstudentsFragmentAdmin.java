@@ -33,7 +33,7 @@ public class ViewstudentsFragmentAdmin extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference rootRef,userRef,users;
+    private DatabaseReference rootRef,userRef;
 
     private ViewstudentsViewModelAdmin viewstudentsViewModelAdmin;
     private AdminViewStudentViewHolder viewStudentViewHolder;

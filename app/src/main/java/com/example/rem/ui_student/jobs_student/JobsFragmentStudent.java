@@ -3,6 +3,7 @@ package com.example.rem.ui_student.jobs_student;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rem.Model.ViewJobsRecruiter;
 import com.example.rem.Model.ViewJobsStudent;
 import com.example.rem.R;
 import com.example.rem.ViewHolders.StudentViewJobViewHolder;
@@ -21,9 +23,18 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.UserWriteRecord;
+
+import java.util.Iterator;
+import java.util.Objects;
+
 
 public class JobsFragmentStudent extends Fragment {
     private RecyclerView viewjobRecycler;
@@ -32,6 +43,10 @@ public class JobsFragmentStudent extends Fragment {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference rootRef,userRef;
     private JobsViewModelStudent jobsViewModelStudent;
+    DataSnapshot next;
+    String key;
+    Query query;
+    private String cn,cl,jp,wt;
     StudentViewJobViewHolder studentViewJobViewHolder ;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -45,7 +60,12 @@ public class JobsFragmentStudent extends Fragment {
         viewjobRecycler.setLayoutManager(layoutManager);
         firebaseDatabase = FirebaseDatabase.getInstance();
         rootRef = firebaseDatabase.getReference();
-        userRef = rootRef.child("recruiter");
+
+        //by entering manually userid
+        userRef = rootRef.child("recruiter").child("32S2yattjRgpx2qraHstF5fQVH92").child("Jobs");
+
+
+
         return root;
     }
 
@@ -58,12 +78,34 @@ public class JobsFragmentStudent extends Fragment {
                     @NonNull
                     @Override
                     public ViewJobsStudent parseSnapshot(@NonNull DataSnapshot snapshot) {
-                        String key = userRef.child(snapshot.getKey()).child("Jobs").getKey();
 
-                        return new ViewJobsStudent(snapshot.child(snapshot.getKey()).child("Jobs").child(key).child("companyname").getValue().toString(),
-                                snapshot.child(snapshot.getKey()).child("Jobs").child(key).child("companydescription").getValue().toString(),
-                                snapshot.child(snapshot.getKey()).child("Jobs").child(key).child(snapshot.getKey()).child("jobpost").getValue().toString(),
-                                snapshot.child(snapshot.getKey()).child("Jobs").child(key).child("workingtype").getValue().toString());
+                        rootRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for(DataSnapshot root : dataSnapshot.getChildren()){
+                                    for(DataSnapshot user : root.getChildren()){
+                                        for(DataSnapshot job : user.child("Jobs").getChildren()){
+
+                                            // can be used later
+                                            cn = job.child("companyname").getValue().toString();
+                                            cl=job.child("companydescription").getValue().toString();
+                                            jp = job.child("jobpost").getValue().toString();
+                                            wt= job.child("workingtype").getValue().toString();
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                        return new ViewJobsStudent(snapshot.child("companyname").getValue().toString(),
+                                snapshot.child("companydescription").getValue().toString(),
+                                snapshot.child("jobpost").getValue().toString(),
+                                snapshot.child("workingtype").getValue().toString());
                     }
                 })
                 .build();

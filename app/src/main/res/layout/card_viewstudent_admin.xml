@@ -58,11 +58,21 @@
         android:textSize="20dp"
         android:layout_marginLeft="5dp"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/admin_viewstudent_card_fields"
+        android:layout_marginTop="220dp"
+        android:text="Fields"
+        android:textSize="20dp"
+        android:layout_marginLeft="5dp"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/admin_viewstudent_card_collegename"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="260dp"
         android:text="College name"
         android:textSize="20dp"
         android:layout_marginLeft="5dp"
@@ -72,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/admin_viewstudent_card_passingyear"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="300dp"
         android:text="Passing Year"
         android:textSize="20dp"
         android:layout_marginLeft="5dp"

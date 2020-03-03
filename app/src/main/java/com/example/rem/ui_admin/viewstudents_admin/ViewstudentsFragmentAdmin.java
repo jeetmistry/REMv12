@@ -85,7 +85,7 @@ public class ViewstudentsFragmentAdmin extends Fragment {
                 adminViewStudentViewHolder.qualification.setText("Qualification : "+storeStudentProfile.getQualification());
                 adminViewStudentViewHolder.collegename.setText("College Name : "+storeStudentProfile.getCollegeName());
                 adminViewStudentViewHolder.passingyear.setText("Passing Year : "+storeStudentProfile.getPassingYear());
-
+                adminViewStudentViewHolder.fields.setText("Field : "+storeStudentProfile.getFields());
             }
 
             @NonNull

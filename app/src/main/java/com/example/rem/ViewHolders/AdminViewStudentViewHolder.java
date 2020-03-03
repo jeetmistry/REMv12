@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.rem.R;
 
 public class AdminViewStudentViewHolder extends RecyclerView.ViewHolder {
-    public TextView fullname, email, phone, city, qualification, collegename, passingyear;
+    public TextView fullname, email, phone, city, qualification,fields, collegename, passingyear;
     public AdminViewStudentViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -18,6 +18,7 @@ public class AdminViewStudentViewHolder extends RecyclerView.ViewHolder {
         phone = itemView.findViewById(R.id.admin_viewstudent_card_phone);
         city = itemView.findViewById(R.id.admin_viewstudent_card_city);
         qualification = itemView.findViewById(R.id.admin_viewstudent_card_qualification);
+        fields = itemView.findViewById(R.id.admin_viewstudent_card_fields);
         collegename = itemView.findViewById(R.id.admin_viewstudent_card_collegename);
         passingyear = itemView.findViewById(R.id.admin_viewstudent_card_passingyear);
     }

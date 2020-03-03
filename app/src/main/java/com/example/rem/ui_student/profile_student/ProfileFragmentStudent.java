@@ -3,6 +3,7 @@ package com.example.rem.ui_student.profile_student;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -45,10 +46,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -66,6 +69,7 @@ public class ProfileFragmentStudent extends Fragment {
     private String profileName;
     private String userid;
     private Button saveProfile;
+    private ProgressDialog progressDialog;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference profileRef,rootRef, userRef,userIdRef;
     Uri contentURI;
@@ -106,7 +110,7 @@ public class ProfileFragmentStudent extends Fragment {
                 StorageReference userReference = storageReference.child("student/");
                 String userid=firebaseAuth.getCurrentUser().getUid().toString();
                 useridReference = userReference.child(userid+"/");
-                StorageReference ProfileRef=useridReference.child("profile");
+                StorageReference ProfileRef=useridReference.child("profile/");
 
 //                saveProfile.setOnClickListener(new View.OnClickListener() {
 //                    @Override
@@ -162,6 +166,7 @@ public class ProfileFragmentStudent extends Fragment {
                     String Passingyear = dataSnapshot.child("passingYear").getValue().toString();
                     String field = dataSnapshot.child("fields").getValue().toString();
 
+
                     student_profile_username.setText(Name);
                     student_profile_email.setText(email);
                     student_profile_phonenumber.setText(phone);
@@ -171,6 +176,7 @@ public class ProfileFragmentStudent extends Fragment {
                     student_profile_collegename.setText(Collegename);
                     student_profile_passing_year.setText(Passingyear);
                     student_profile_fields.setText(field);
+
                 }
             }
 
@@ -191,6 +197,7 @@ public class ProfileFragmentStudent extends Fragment {
                 collegeName=student_profile_collegename.getText().toString();
                 passingYear=student_profile_passing_year.getText().toString();
                 fields=student_profile_fields.getText().toString();
+
 
                 if(TextUtils.isEmpty(name)){
                     Toast.makeText(getContext(), "Please enter Full name", Toast.LENGTH_SHORT).show();
@@ -226,6 +233,10 @@ public class ProfileFragmentStudent extends Fragment {
                     return;
                 }
 
+                if(contentURI!=null) {
+                    uploadImage();
+                }
+
                StoreStudentProfile ssp = new StoreStudentProfile(name,email,phone,city,qualification,collegeName,passingYear,fields);
                profileRef.setValue(ssp).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -233,12 +244,6 @@ public class ProfileFragmentStudent extends Fragment {
                         Toast.makeText(getContext(), "Profile Saved Succesfully", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-//                FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
-//                fragmentTransaction.add(R.id.activity_profile_student,new HomeFragmentStudent());
-//                fragmentTransaction.commit();
-
-
             }
 
         });
@@ -323,5 +328,41 @@ public class ProfileFragmentStudent extends Fragment {
             Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();
         }
 
+        //uploading image
+        private void uploadImage() {
+
+            if(contentURI!= null)
+            {
+
+                final ProgressDialog progressDialog = new ProgressDialog(getContext());
+                progressDialog.setTitle("Uploading...");
+                progressDialog.show();
+
+                StorageReference ref = useridReference.child("images/"+ UUID.randomUUID().toString());
+                ref.putFile(contentURI)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                progressDialog.dismiss();
+                                Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressDialog.dismiss();
+                                Toast.makeText(getContext(), "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                        .getTotalByteCount());
+                                progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                            }
+                        });
+            }
+        }
     }
 

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -25,19 +26,24 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.rem.Model.StoreRecruiterProfile;
 import com.example.rem.Model.StoreStudentProfile;
 import com.example.rem.R;
+import com.example.rem.ui_student.home_student.HomeFragmentStudent;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -89,10 +95,7 @@ public class ProfileFragmentStudent extends Fragment {
         student_profile_passing_year= root.findViewById(R.id. student_profile_passing_year);
         student_profile_fields=root.findViewById(R.id.student_profile_fields);
 
-        profileViewModelStudent.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+
                 profileImage=root.findViewById(R.id.student_profile_imageView);
                 navprofileImage=root.findViewById(R.id.imageViewStudent);
                // saveProfile = (Button)root.findViewById(R.id.student_profile_resumesavebutton);
@@ -124,8 +127,7 @@ public class ProfileFragmentStudent extends Fragment {
 //                    }
 //                });
 
-            }
-        });
+
 
 
         selectImage=root.findViewById(R.id.student_profile_floatingActionButton);
@@ -145,12 +147,42 @@ public class ProfileFragmentStudent extends Fragment {
         String userId= firebaseAuth.getCurrentUser().getUid().toString();
         userIdRef=userRef.child(userId);
         profileRef=userIdRef.child("profile");
-
         student_profile_resumesavebutton = root.findViewById(R.id.student_profile_resumesavebutton);
+
+        profileRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    String Name = dataSnapshot.child("name").getValue().toString();
+                    String email = dataSnapshot.child("email").getValue().toString();
+                    String phone = dataSnapshot.child("phone").getValue().toString();
+                    String City = dataSnapshot.child("city").getValue().toString();
+                    String Qualification = dataSnapshot.child("qualification").getValue().toString();
+                    String Collegename = dataSnapshot.child("collegeName").getValue().toString();
+                    String Passingyear = dataSnapshot.child("passingYear").getValue().toString();
+                    String field = dataSnapshot.child("fields").getValue().toString();
+
+                    student_profile_username.setText(Name);
+                    student_profile_email.setText(email);
+                    student_profile_phonenumber.setText(phone);
+                    student_profile_city.setText(City);
+                    student_profile_city.setText(City);
+                    student_profile_qualification.setText(Qualification);
+                    student_profile_collegename.setText(Collegename);
+                    student_profile_passing_year.setText(Passingyear);
+                    student_profile_fields.setText(field);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         student_profile_resumesavebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name,email,phone,city,qualification,collegeName,passingYear,fields;
+                final String name,email,phone,city,qualification,collegeName,passingYear,fields;
                 name=student_profile_username.getText().toString();
                 email=student_profile_email.getText().toString();
                 phone=student_profile_phonenumber.getText().toString();
@@ -201,6 +233,10 @@ public class ProfileFragmentStudent extends Fragment {
                         Toast.makeText(getContext(), "Profile Saved Succesfully", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+//                FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
+//                fragmentTransaction.add(R.id.activity_profile_student,new HomeFragmentStudent());
+//                fragmentTransaction.commit();
 
 
             }

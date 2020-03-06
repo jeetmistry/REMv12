@@ -23,14 +23,14 @@ public class HomeFragmentRecruiter extends Fragment {
         homeViewModelRecruiter =
                 ViewModelProviders.of(this).get(HomeViewModelRecruiter.class);
         View root = inflater.inflate(R.layout.fragment_home_recruiter, container, false);
-        final TextView textView = root.findViewById(R.id.text_home_recruiter);
-        homeViewModelRecruiter.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        return root;
-    }
+        //final TextView textView = root.findViewById(R.id.text_home_recruiter);
+//        homeViewModelRecruiter.getText().observe(this, new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
+    return root;
+ }
 
 }

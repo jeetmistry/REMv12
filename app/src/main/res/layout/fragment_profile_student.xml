@@ -253,6 +253,16 @@
                     android:id="@+id/student_profile_floatingActionButton"
                     android:src="@drawable/change_picture_student"
                     />
+                <Button
+                    android:id="@+id/student_profile_uploadbutton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_below="@+id/student_profile_imageView"
+                    android:background="@drawable/button"
+                    android:text="Upload"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="6dp"/>
 
             </RelativeLayout>
 

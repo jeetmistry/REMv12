@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.opengl.Visibility;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,7 @@ import com.example.rem.R;
 import com.example.rem.ui_student.home_student.HomeFragmentStudent;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -48,9 +51,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
@@ -64,15 +69,19 @@ public class ProfileFragmentStudent extends Fragment {
     private int GALLERY = 1 , CAMERA = 2;
     FirebaseAuth firebaseAuth;
     private FirebaseStorage firebaseStorage;
-    private StorageReference useridReference;
+    private StorageReference useridReference,mStorageRef;
     private FirebaseUser firebaseUser;
     private String profileName;
     private String userid;
     private Button saveProfile;
     private ProgressDialog progressDialog;
+    private ProgressBar mProgressBar;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference profileRef,rootRef, userRef,userIdRef;
+    DatabaseReference profileRef,rootRef, userRef,userIdRef, mDatabaseRef;
     Uri contentURI;
+    ImageView studentProfile;
+    Button btnupload;
+    private StorageTask mUploadTask;
     EditText student_profile_username;
     EditText student_profile_email;
     EditText student_profile_phonenumber;
@@ -98,6 +107,7 @@ public class ProfileFragmentStudent extends Fragment {
         student_profile_collegename= root.findViewById(R.id. student_profile_collegename);
         student_profile_passing_year= root.findViewById(R.id. student_profile_passing_year);
         student_profile_fields=root.findViewById(R.id.student_profile_fields);
+        btnupload=root.findViewById(R.id.student_profile_uploadbutton);
 
 
                 profileImage=root.findViewById(R.id.student_profile_imageView);
@@ -112,27 +122,12 @@ public class ProfileFragmentStudent extends Fragment {
                 useridReference = userReference.child(userid+"/");
                 StorageReference ProfileRef=useridReference.child("profile/");
 
-//                saveProfile.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        useridReference.child("Images/").putFile(contentURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                            @Override
-//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                Toast.makeText(getContext(), "Profile Uploaded", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }).addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                String ee= e.toString();
-//                                Toast.makeText(getActivity(), ee, Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//
-//                    }
-//                });
-
-
-
+btnupload.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        uploadFile();
+    }
+});
 
         selectImage=root.findViewById(R.id.student_profile_floatingActionButton);
         selectImage.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +136,6 @@ public class ProfileFragmentStudent extends Fragment {
                 showPictureDialog();
             }
         });
-
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -182,7 +176,6 @@ public class ProfileFragmentStudent extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
         student_profile_resumesavebutton.setOnClickListener(new View.OnClickListener() {
@@ -234,7 +227,7 @@ public class ProfileFragmentStudent extends Fragment {
                 }
 
                 if(contentURI!=null) {
-                    uploadImage();
+                    uploadFile();
                 }
 
                StoreStudentProfile ssp = new StoreStudentProfile(name,email,phone,city,qualification,collegeName,passingYear,fields);
@@ -272,7 +265,7 @@ public class ProfileFragmentStudent extends Fragment {
     //ALERT DIALOG ASKING GALLERY OR CAMERA INTENT
     public void showPictureDialog(){
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(getActivity());
-        pictureDialog.setTitle("Select Action");
+        pictureDialog.setTitle("Select   Action");
         String[] pictureDialogItems = {
                 "Select photo from gallery",
                 "Capture photo from camera" };
@@ -329,40 +322,71 @@ public class ProfileFragmentStudent extends Fragment {
         }
 
         //uploading image
-        private void uploadImage() {
-
-            if(contentURI!= null)
-            {
-
-                final ProgressDialog progressDialog = new ProgressDialog(getContext());
-                progressDialog.setTitle("Uploading...");
-                progressDialog.show();
-
-                StorageReference ref = useridReference.child("images/"+ UUID.randomUUID().toString());
-                ref.putFile(contentURI)
+        private void uploadFile() {
+            if (contentURI != null) {
+                StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                        + "." + (contentURI));
+                mUploadTask = fileReference.putFile(contentURI)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                progressDialog.dismiss();
-                                Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
+
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mProgressBar.setProgress(0);
+                                    }
+                                }, 500);
+                                Toast.makeText(getContext(), "zhal ikdachhhh", Toast.LENGTH_SHORT).show();
+                          /*  Upload upload=new Upload(mEditTextFileName.getText().toString().trim(),
+                                    taskSnapshot.getUploadSessionUri().toString());
+                            String uploadID=mDatabaseRef.push().getKey();
+                            mDatabaseRef.child(uploadID).setValue(upload);*/
+                                Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                                while (!urlTask.isSuccessful()) ;
+                                Uri downloadUrl = urlTask.getResult();
+                                Upload upload = new Upload(downloadUrl.toString());
+                                String uploadId = mDatabaseRef.push().getKey();
+
+
+
                             }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
+                        }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                progressDialog.dismiss();
-                                Toast.makeText(getContext(), "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+
+
                             }
-                        })
-                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                                double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
-                                        .getTotalByteCount());
-                                progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                                double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                                mProgressBar.setProgress((int) progress);
+
                             }
                         });
+
+            } else {
+                Toast.makeText(getContext(), "Please select image", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+        public static class Upload{
+            public String mImageUrl;
+
+            public Upload(String mImageUrl) {
+                this.mImageUrl = mImageUrl;
+            }
+
+            public String getmImageUrl() {
+                return mImageUrl;
+            }
+
+            public void setmImageUrl(String mImageUrl) {
+                this.mImageUrl = mImageUrl;
             }
         }
-    }
+}
 

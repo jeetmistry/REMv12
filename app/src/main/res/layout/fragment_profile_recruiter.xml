@@ -52,12 +52,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="Profile Details"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlue"/>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorBlue">
+                        android:textColorHint="#000000">
 
                         <EditText
                             android:layout_width="match_parent"
@@ -65,14 +66,14 @@
                             android:id="@+id/recruiter_profile_name"
                             android:hint="Please Enter Full Name"
                             android:imeOptions="actionNext"
-                            android:textColorHint="@color/colorBlue" />
+                            android:textColorHint="#000000" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorBlue">
+                        android:textColorHint="#000000">
 
                         <EditText
                             android:layout_width="match_parent"
@@ -89,13 +90,13 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorBlue">
+                        android:textColorHint="#000000">
 
                         <EditText
                             android:id="@+id/recruiter_profile_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="phone Number"
+                            android:hint="Phone Number"
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:textColorHint="@color/colorBlue" />
@@ -107,12 +108,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="Company Details"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlue"/>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorBlue">
+                        android:textColorHint="#000000">
 
                         <EditText
                             android:layout_width="match_parent"
@@ -127,7 +129,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorBlue">
+                        android:textColorHint="#000000">
 
                         <EditText
                             android:layout_width="match_parent"
@@ -143,7 +145,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorBlue">
+                        android:textColorHint="#000000">
 
 
                         <EditText

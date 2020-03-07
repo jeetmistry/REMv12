@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.rem">
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_remlogo"
@@ -12,10 +14,16 @@
         android:roundIcon="@mipmap/ic_remlogo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".ui_recruiter.RecruiterApplicationCardClickActivity"
+            android:theme="@style/Theme.AppCompat">
+        </activity>
+        <activity
+            android:name=".ui_student.StudentJobCardClickActivity"
+            android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".AdminNavigation"
             android:label="@string/title_activity_admin_navigation"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity android:name=".recruiter_password" />
         <activity android:name=".student_password" />
         <activity

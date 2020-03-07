@@ -29,8 +29,11 @@ import com.example.rem.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 
@@ -71,20 +74,37 @@ public class ProfileFragmentRecruiter extends Fragment {
         recruiter_field_of_work=root.findViewById(R.id.recruiter_field_of_work);
 
 
-        profileViewModelRecruiter.getText().observe(this, new Observer<String>() {
+
+        //initializing database variables
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        rootRef = firebaseDatabase.getReference();
+        userRef=rootRef.child("recruiter");
+        String userId= firebaseAuth.getCurrentUser().getUid().toString();
+        userIdRef=userRef.child(userId);
+        profileRef = userIdRef.child("profile");
+
+        profileRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-                //initializing database variables
-                firebaseAuth = FirebaseAuth.getInstance();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String Name = dataSnapshot.child("fullname").getValue().toString();
+                String email = dataSnapshot.child("email").getValue().toString();
+                String phone = dataSnapshot.child("phone").getValue().toString();
+                String cn = dataSnapshot.child("companyname").getValue().toString();
+                String cl = dataSnapshot.child("companylocation").getValue().toString();
+                String field = dataSnapshot.child("fieldsOfWork").getValue().toString();
 
-                firebaseDatabase = FirebaseDatabase.getInstance();
-                rootRef = firebaseDatabase.getReference();
-                userRef=rootRef.child("recruiter");
-                String userId= firebaseAuth.getCurrentUser().getUid().toString();
-                userIdRef=userRef.child(userId);
-                profileRef = userIdRef.child("profile");
+                recruiter_profile_name.setText(Name);
+                recruiter_profile_company_name.setText(cn);
+                recruiter_profile_email.setText(email);
+                recruiter_profile_phone.setText(phone);
+                recruiter_profile_company_location.setText(cl);
+                recruiter_field_of_work.setText(field);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });

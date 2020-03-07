@@ -1,5 +1,6 @@
 package com.example.rem.ui_student.jobs_student;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.example.rem.Model.ViewJobsRecruiter;
 import com.example.rem.Model.ViewJobsStudent;
 import com.example.rem.R;
 import com.example.rem.ViewHolders.StudentViewJobViewHolder;
+import com.example.rem.ui_student.StudentJobCardClickActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
@@ -112,11 +114,23 @@ public class JobsFragmentStudent extends Fragment {
 
         FirebaseRecyclerAdapter<ViewJobsStudent, StudentViewJobViewHolder> adapter = new FirebaseRecyclerAdapter<ViewJobsStudent, StudentViewJobViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull StudentViewJobViewHolder studentViewJobViewHolder, int i, @NonNull ViewJobsStudent viewJobsStudent) {
+            protected void onBindViewHolder(@NonNull StudentViewJobViewHolder studentViewJobViewHolder, int i, @NonNull final ViewJobsStudent viewJobsStudent) {
                 studentViewJobViewHolder.companyName.setText("Company Name : "+viewJobsStudent.getCompanyname());
                 studentViewJobViewHolder.jobPost.setText(viewJobsStudent.getJobpost());
                 studentViewJobViewHolder.companyDescription.setText("Company Description : "+viewJobsStudent.getCompanydescription());
                 studentViewJobViewHolder.workingtype.setText("Working Type : "+viewJobsStudent.getWorkingtype());
+
+                studentViewJobViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getContext(), StudentJobCardClickActivity.class);
+                        intent.putExtra("job post",viewJobsStudent.getJobpost());
+                        intent.putExtra("company name",viewJobsStudent.getCompanyname());
+                        intent.putExtra("company description",viewJobsStudent.getCompanydescription());
+                        intent.putExtra("working type",viewJobsStudent.getWorkingtype());
+                        startActivity(intent);
+                    }
+                });
             }
 
             @NonNull

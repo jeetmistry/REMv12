@@ -50,7 +50,7 @@ public class AdminNavigation extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home_admin, R.id.nav_profile_admin, R.id.nav_viewcompanies_admin,
+                R.id.nav_home_admin, R.id.nav_viewcompanies_admin,
                 R.id.nav_viewstudents_admin, R.id.nav_help_admin, R.id.nav_viewfeedbacks_admin)
                 .setDrawerLayout(drawer)
                 .build();

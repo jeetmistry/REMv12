@@ -12,12 +12,6 @@
         tools:layout="@layout/fragment_home_admin" />
 
     <fragment
-        android:id="@+id/nav_profile_admin"
-        android:name="com.example.rem.ui_admin.profile_admin.ProfileFragmentAdmin"
-        android:label="@string/menu_profile_admin"
-        tools:layout="@layout/fragment_profile_admin" />
-
-    <fragment
         android:id="@+id/nav_viewcompanies_admin"
         android:name="com.example.rem.ui_admin.viewcompanies_admin.ViewcompaniesFragmentAdmin"
         android:label="@string/menu_viewcompanies_admin"

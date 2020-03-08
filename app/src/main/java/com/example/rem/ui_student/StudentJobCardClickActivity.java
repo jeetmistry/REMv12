@@ -2,9 +2,16 @@ package com.example.rem.ui_student;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +19,9 @@ import android.widget.TextView;
 
 import com.example.rem.Model.ViewApplicationsStudent;
 import com.example.rem.R;
+import com.example.rem.RecruiterNavigation;
+import com.example.rem.StudentNavigation;
+import com.example.rem.ui_recruiter.RecruiterApplicationCardClickActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -90,11 +100,40 @@ public class StudentJobCardClickActivity extends AppCompatActivity {
 
     }
 
+
     private void enterIntoFirebase() {
         String status = "Applied";
         ViewApplicationsStudent vas = new ViewApplicationsStudent(job,compname,compdesc,worktype,status);
         appliedJobRef.child(job).setValue(vas);
 
+        //notification
+        Uri noti = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        String text="The job application for post "+job+" has been approved and accepted";
+        NotificationCompat.Builder builder =new NotificationCompat.Builder(StudentJobCardClickActivity.this)
+                .setSmallIcon(R.mipmap.ic_remlogo)
+                .setContentTitle("Accepted Application")
+                .setContentText("The job application for post "+job+" has been approved and accepted")
+                .setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setSound(noti)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(text));
+
+        Intent intent= new Intent(StudentJobCardClickActivity.this, RecruiterNavigation.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent =PendingIntent.getActivity(StudentJobCardClickActivity.this,0,intent,PendingIntent.FLAG_CANCEL_CURRENT);
+        builder.setContentIntent(pendingIntent);
+        NotificationManager notificationManager =(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(0,builder.build());
+
+
     }
 
-}
+
+
+
+
+
+    }
+
+

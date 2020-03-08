@@ -9,10 +9,6 @@
             android:icon="@drawable/ic_menu_home"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_profile_admin"
-            android:icon="@drawable/ic_menu_profile"
-            android:title="@string/menu_profile_admin" />
-        <item
             android:id="@+id/nav_viewcompanies_admin"
             android:icon="@drawable/ic_menu_company"
             android:title="@string/menu_viewcompanies_admin" />

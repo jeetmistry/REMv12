@@ -21,7 +21,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:textAlignment="center"
         android:textSize="20sp"
         android:text="AdminMessage"
         app:layout_constraintEnd_toEndOf="parent"

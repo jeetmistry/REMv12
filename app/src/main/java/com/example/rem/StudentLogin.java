@@ -2,6 +2,8 @@ package com.example.rem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -49,6 +51,11 @@ public class StudentLogin extends AppCompatActivity {
                 userEmail = firebaseUser.getEmail();
                 userRef=rootRef.child("student");
                 useridRef = userRef.child(userid);
+                final ProgressDialog pd = new ProgressDialog(StudentLogin.this);
+                pd.setTitle("Logging Student");
+                pd.setMessage("Please wait logging in");
+                pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pd.show();;
 
                 useridRef.child("username").child("username").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -57,6 +64,7 @@ public class StudentLogin extends AppCompatActivity {
                         if (Objects.equals(userEmail, sameEmail)) {
                             Intent intent = new Intent(getApplicationContext(), StudentNavigation.class);
                             startActivity(intent);
+                            pd.dismiss();
                             finish();
                         }
                     }
@@ -110,8 +118,11 @@ public class StudentLogin extends AppCompatActivity {
                     Toast.makeText(StudentLogin.this, "Password too short", Toast.LENGTH_SHORT).show();
                 }
 
-
-                progressBar.setVisibility(View.VISIBLE);
+                final ProgressDialog pd = new ProgressDialog(StudentLogin.this);
+                pd.setTitle("Logging Student");
+                pd.setMessage("Please wait validating credentials and logging in.");
+                pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pd.show();;
                 mAuth .signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(StudentLogin.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -133,6 +144,7 @@ public class StudentLogin extends AppCompatActivity {
                                                     FirebaseAuth.getInstance().signOut();
                                                     Toast.makeText(StudentLogin.this, "Please login using a Student account only ", Toast.LENGTH_SHORT).show();
                                                     finish();
+                                                    pd.dismiss();
                                                     startActivity(new Intent(StudentLogin.this,StudentLogin.class));
 
                                                 }

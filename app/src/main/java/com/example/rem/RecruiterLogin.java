@@ -53,7 +53,7 @@ public class RecruiterLogin extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         sameEmail = (String) dataSnapshot.getValue();
                         if (Objects.equals(userEmail, sameEmail)) {
-                            Intent intent = new Intent(RecruiterLogin.this, RecruiterNavigation.class);
+                            Intent intent = new Intent(getApplicationContext(), RecruiterNavigation.class);
                             startActivity(intent);
                             finish();
                         }

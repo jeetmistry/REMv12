@@ -77,7 +77,7 @@ public class RecruiterApplicationCardClickActivity extends AppCompatActivity {
     private void createAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Select your option");
-        String alertItem[] = {"Accept Application ","Cancel"};
+        String alertItem[] = {"Accept Application ","Keep Pending","Reject applicant","Cancel"};
         builder.setItems(alertItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -86,6 +86,11 @@ public class RecruiterApplicationCardClickActivity extends AppCompatActivity {
                         enterIntoFirebase();
                         break;
                     case 1:
+                        enterPendingToFirebase();
+                        break;
+                    case 2:
+                        enterRejected();
+                    case 3:
                         dialog.cancel();
                         break;
                 }
@@ -93,6 +98,18 @@ public class RecruiterApplicationCardClickActivity extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    private void enterRejected() {
+        String status = "Rejected";
+        ViewApplicationsStudent vas = new ViewApplicationsStudent(job,compname,compdesc,worktype,status);
+        appliedJobRef.child(job).setValue(vas);
+    }
+
+    private void enterPendingToFirebase() {
+        String status = "Pending";
+        ViewApplicationsStudent vas = new ViewApplicationsStudent(job,compname,compdesc,worktype,status);
+        appliedJobRef.child(job).setValue(vas);
     }
 
     private void enterIntoFirebase() {

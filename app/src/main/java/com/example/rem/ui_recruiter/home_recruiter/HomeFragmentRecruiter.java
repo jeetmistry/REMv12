@@ -55,10 +55,11 @@ public class HomeFragmentRecruiter extends Fragment {
 
         //database initialization
         firebaseAuth = FirebaseAuth.getInstance();
+        userid = firebaseAuth.getCurrentUser().getUid();
         firebaseDatabase = FirebaseDatabase.getInstance();
         rootRef = firebaseDatabase.getReference();
         userRef = rootRef.child("recruiter");
-        userid = firebaseAuth.getCurrentUser().getUid();
+
         userIdRef = userRef.child(userid);
         profileRef = userIdRef.child("profile");
 

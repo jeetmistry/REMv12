@@ -3,10 +3,11 @@
     android:orientation="vertical"
     android:id="@+id/student_viewjobs_cardView"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
-    android:layout_margin="15dp"
+    android:layout_height="290dp"
+    android:layout_margin="5dp"
     android:layout_marginTop="10dp"
-    app:cardCornerRadius="10dp"
+    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="#33ccff"
     app:cardElevation="2mm">
 
 

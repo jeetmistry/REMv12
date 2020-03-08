@@ -78,7 +78,7 @@ public class ProfileFragmentStudent extends Fragment {
     private ProgressBar mProgressBar;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference profileRef,rootRef, userRef,userIdRef, mDatabaseRef;
-    Uri contentURI;
+    Uri filePath;
     ImageView studentProfile;
     Button btnupload;
     private StorageTask mUploadTask;
@@ -121,13 +121,6 @@ public class ProfileFragmentStudent extends Fragment {
                 String userid=firebaseAuth.getCurrentUser().getUid().toString();
                 useridReference = userReference.child(userid+"/");
                 StorageReference ProfileRef=useridReference.child("profile/");
-
-btnupload.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        uploadFile();
-    }
-});
 
         selectImage=root.findViewById(R.id.student_profile_floatingActionButton);
         selectImage.setOnClickListener(new View.OnClickListener() {
@@ -190,6 +183,7 @@ btnupload.setOnClickListener(new View.OnClickListener() {
                 collegeName=student_profile_collegename.getText().toString();
                 passingYear=student_profile_passing_year.getText().toString();
                 fields=student_profile_fields.getText().toString();
+                profileImage=root.findViewById(R.id.student_profile_imageView);
 
 
                 if(TextUtils.isEmpty(name)){
@@ -225,24 +219,31 @@ btnupload.setOnClickListener(new View.OnClickListener() {
                     Toast.makeText(getContext(), "Please enter fields of Interest", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                student_profile_resumesavebutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        uploadImage();
+                    }
+                });
 
-                if(contentURI!=null) {
-                    uploadFile();
-                }
 
-               StoreStudentProfile ssp = new StoreStudentProfile(name,email,phone,city,qualification,collegeName,passingYear,fields);
+                StoreStudentProfile ssp = new StoreStudentProfile(name,email,phone,city,qualification,collegeName,passingYear,fields);
                profileRef.setValue(ssp).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(getContext(), "Profile Saved Succesfully", Toast.LENGTH_SHORT).show();
                     }
                 });
+
             }
+
 
         });
 
+
         return root;
     }
+
     //FUNCTION FOR TAKING PHOTO FROM CAMERA INTENT
     private void takePhotoFromCamera() {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA)
@@ -263,12 +264,12 @@ btnupload.setOnClickListener(new View.OnClickListener() {
     }
 
     //ALERT DIALOG ASKING GALLERY OR CAMERA INTENT
-    public void showPictureDialog(){
+    public void showPictureDialog() {
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(getActivity());
         pictureDialog.setTitle("Select   Action");
         String[] pictureDialogItems = {
                 "Select photo from gallery",
-                "Capture photo from camera" };
+                "Capture photo from camera"};
         pictureDialog.setItems(pictureDialogItems,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -284,7 +285,18 @@ btnupload.setOnClickListener(new View.OnClickListener() {
                     }
                 });
         pictureDialog.show();
-    }
+
+
+        }
+
+
+
+
+
+
+
+
+
 
     //For storing data in imageview of student profile
     @Override
@@ -296,9 +308,9 @@ btnupload.setOnClickListener(new View.OnClickListener() {
         }
         if (requestCode == GALLERY && resultCode==RESULT_OK){
             if (data != null) {
-                contentURI = data.getData();
+                filePath= data.getData();
                 try {
-                    Bitmap imgbitmap = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), contentURI);
+                    Bitmap imgbitmap = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), filePath);
 
                     Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();
                     profileImage.setImageBitmap(imgbitmap);
@@ -318,15 +330,17 @@ btnupload.setOnClickListener(new View.OnClickListener() {
 
                 }
 
+
             Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();
         }
 
+
         //uploading image
-        private void uploadFile() {
-            if (contentURI != null) {
+        private void uploadImage() {
+            if (filePath != null) {
                 StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
-                        + "." + (contentURI));
-                mUploadTask = fileReference.putFile(contentURI)
+                        + "." + getFileExtension(filePath));
+                mUploadTask= fileReference.putFile(filePath)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -338,16 +352,18 @@ btnupload.setOnClickListener(new View.OnClickListener() {
                                         mProgressBar.setProgress(0);
                                     }
                                 }, 500);
-                                Toast.makeText(getContext(), "zhal ikdachhhh", Toast.LENGTH_SHORT).show();
-                          /*  Upload upload=new Upload(mEditTextFileName.getText().toString().trim(),
-                                    taskSnapshot.getUploadSessionUri().toString());
-                            String uploadID=mDatabaseRef.push().getKey();
-                            mDatabaseRef.child(uploadID).setValue(upload);*/
+                                Toast.makeText(getContext(), "SUCCESSFULLY !", Toast.LENGTH_SHORT).show();
+//                           Upload upload=new Upload(mEditTextFileName.getText().toString().trim(),
+//                                    taskSnapshot.getUploadSessionUri().toString());
+//                            String uploadID=mDatabaseRef.push().getKey();
+//                            mDatabaseRef.child(uploadID).setValue(upload);
                                 Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
                                 while (!urlTask.isSuccessful()) ;
                                 Uri downloadUrl = urlTask.getResult();
                                 Upload upload = new Upload(downloadUrl.toString());
+                                mDatabaseRef.child(mDatabaseRef.push().getKey()).setValue(upload);
                                 String uploadId = mDatabaseRef.push().getKey();
+                                mDatabaseRef.child(uploadId).setValue(upload);
 
 
 
@@ -373,7 +389,13 @@ btnupload.setOnClickListener(new View.OnClickListener() {
             }
 
         }
-        public static class Upload{
+
+    private long getFileExtension(Uri contentURI) {
+        return getFileExtension(contentURI);
+    }
+
+
+    public static class Upload{
             public String mImageUrl;
 
             public Upload(String mImageUrl) {

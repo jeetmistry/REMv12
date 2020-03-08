@@ -134,6 +134,7 @@ public class StudentLogin extends AppCompatActivity {
                                                     Toast.makeText(StudentLogin.this, "Please login using a Student account only ", Toast.LENGTH_SHORT).show();
                                                     finish();
                                                     startActivity(new Intent(StudentLogin.this,StudentLogin.class));
+
                                                 }
                                             }
 

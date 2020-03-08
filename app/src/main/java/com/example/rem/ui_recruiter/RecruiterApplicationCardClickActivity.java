@@ -2,6 +2,7 @@ package com.example.rem.ui_recruiter;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import com.example.rem.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 
 public class RecruiterApplicationCardClickActivity extends AppCompatActivity {
     public TextView jobpost, companyname, companydescription, workingtype,status;
@@ -98,5 +100,7 @@ public class RecruiterApplicationCardClickActivity extends AppCompatActivity {
         String status = "Accepted";
         ViewApplicationsStudent vas = new ViewApplicationsStudent(job,compname,compdesc,worktype,status);
         appliedJobRef.child(job).setValue(vas);
+
+        ;
     }
 }

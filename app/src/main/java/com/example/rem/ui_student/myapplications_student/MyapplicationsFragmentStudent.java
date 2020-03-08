@@ -1,5 +1,6 @@
 package com.example.rem.ui_student.myapplications_student;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -65,13 +67,37 @@ public class MyapplicationsFragmentStudent extends Fragment {
 
         FirebaseRecyclerAdapter<ViewApplicationsStudent,StudentViewMyApplicationsViewHolder> adapter = new FirebaseRecyclerAdapter<ViewApplicationsStudent, StudentViewMyApplicationsViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull StudentViewMyApplicationsViewHolder studentViewMyApplicationsViewHolder, int i, @NonNull ViewApplicationsStudent viewApplicationsStudent) {
+            protected void onBindViewHolder(@NonNull StudentViewMyApplicationsViewHolder studentViewMyApplicationsViewHolder, final int i, @NonNull ViewApplicationsStudent viewApplicationsStudent) {
                     if(studentViewMyApplicationsViewHolder.isRecyclable()) {
                         studentViewMyApplicationsViewHolder.jobPost.setText(viewApplicationsStudent.getJobpost());
                         studentViewMyApplicationsViewHolder.companyName.setText("Company Name : " + viewApplicationsStudent.getCompanyname());
                         studentViewMyApplicationsViewHolder.companyDescription.setText("Company Description : " + viewApplicationsStudent.getCompanydescription());
                         studentViewMyApplicationsViewHolder.workingtype.setText("Working Type : " + viewApplicationsStudent.getWorkingtype());
                         studentViewMyApplicationsViewHolder.status.setText("Status : " + viewApplicationsStudent.getStatus());
+
+                        studentViewMyApplicationsViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                builder.setTitle("Select your option");
+                                String alertItem[] = {"Delete Record "," Cancel "};
+                                builder.setItems(alertItem, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        switch(which){
+                                            case 0:
+                                                String key = getRef(i).getKey();
+                                                appliedJobsRef.child(key).removeValue();
+                                                break;
+                                            case 1:
+                                                dialog.cancel();
+                                        }
+
+                                    }
+                                });
+                                builder.show();
+                            }
+                        });
                     }
                     else{
                         Toast.makeText(getContext(), "No Applications applied", Toast.LENGTH_SHORT).show();

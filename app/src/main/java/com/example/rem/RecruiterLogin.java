@@ -1,6 +1,8 @@
 package com.example.rem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -48,6 +50,11 @@ public class RecruiterLogin extends AppCompatActivity {
                 userEmail = firebaseUser.getEmail();
                 userRef=rootRef.child("recruiter");
                 useridRef = userRef.child(userid);
+                final ProgressDialog pd = new ProgressDialog(RecruiterLogin.this);
+                pd.setTitle("Logging Recruiter");
+                pd.setMessage("Please wait logging in");
+                pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pd.show();
                 useridRef.child("username").child("username").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -55,6 +62,7 @@ public class RecruiterLogin extends AppCompatActivity {
                         if (Objects.equals(userEmail, sameEmail)) {
                             Intent intent = new Intent(getApplicationContext(), RecruiterNavigation.class);
                             startActivity(intent);
+                            pd.dismiss();
                             finish();
                         }
 
@@ -109,7 +117,11 @@ public class RecruiterLogin extends AppCompatActivity {
                 if(password.length()<6){
                     Toast.makeText(RecruiterLogin.this, "Password too short", Toast.LENGTH_SHORT).show();
                 }
-
+                final ProgressDialog pd = new ProgressDialog(RecruiterLogin.this);
+                pd.setTitle("Logging Recruiter");
+                pd.setMessage("Please wait, validating credentials and logging in.");
+                pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pd.show();
                 progressBar.setVisibility(View.VISIBLE);
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(RecruiterLogin.this, new OnCompleteListener<AuthResult>() {
@@ -128,11 +140,13 @@ public class RecruiterLogin extends AppCompatActivity {
                                                 loginEmail = (String) dataSnapshot.getValue();
                                                 if(Objects.equals(email,loginEmail)){
                                                     startActivity(new Intent(RecruiterLogin.this,RecruiterNavigation.class));
+                                                    pd.dismiss();
                                                 }
                                                 else{
                                                     FirebaseAuth.getInstance().signOut();
                                                     Toast.makeText(RecruiterLogin.this, "Please login using a Recruiter account only ", Toast.LENGTH_SHORT).show();
                                                     finish();
+                                                    pd.dismiss();
                                                     startActivity(new Intent(RecruiterLogin.this,RecruiterLogin.class));
 
                                                     ;

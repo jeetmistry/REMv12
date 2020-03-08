@@ -1,5 +1,6 @@
 package com.example.rem.ui_recruiter.viewjobs_recruiter;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -69,12 +71,37 @@ public class ViewjobsFragmentRecruiter extends Fragment {
                 .build();
         FirebaseRecyclerAdapter<ViewJobsRecruiter, RecruiterViewJobViewHolder> adapter =new FirebaseRecyclerAdapter<ViewJobsRecruiter, RecruiterViewJobViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull RecruiterViewJobViewHolder recruiterViewJobViewHolder, int i, @NonNull ViewJobsRecruiter viewJobsRecruiter) {
+            protected void onBindViewHolder(@NonNull final RecruiterViewJobViewHolder recruiterViewJobViewHolder, final int i, @NonNull ViewJobsRecruiter viewJobsRecruiter) {
 
                 recruiterViewJobViewHolder.jobPost.setText(viewJobsRecruiter.getJobpost());
                 recruiterViewJobViewHolder.companyName.setText("Company Name : "+viewJobsRecruiter.getCompanyname());
                 recruiterViewJobViewHolder.companyDescription.setText("Description : "+viewJobsRecruiter.getCompanydescription());
                 recruiterViewJobViewHolder.workingtype.setText(" Working Type : "+viewJobsRecruiter.getWorkingtype());
+
+                recruiterViewJobViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setTitle("Select your option");
+                        String alertItem[] = {"Delete Job ","Cancel "};
+                        builder.setItems(alertItem, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch(which){
+                                    case 0:
+                                        String key = getRef(i).getKey();
+                                        jobRef.child(key).removeValue();
+                                        break;
+                                    case 1:
+                                        dialog.cancel();
+                                }
+
+                            }
+                        });
+                        builder.show();
+
+                    }
+                });
 
             }
 

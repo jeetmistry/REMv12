@@ -55,7 +55,7 @@ public class StudentLogin extends AppCompatActivity {
                 pd.setTitle("Logging Student");
                 pd.setMessage("Please wait logging in");
                 pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                pd.show();;
+                pd.show();
 
                 useridRef.child("username").child("username").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -140,6 +140,7 @@ public class StudentLogin extends AppCompatActivity {
                                                 loginEmail = (String) dataSnapshot.getValue();
                                                 if (Objects.equals(email, loginEmail)) {
                                                     startActivity(new Intent(StudentLogin.this, StudentNavigation.class));
+                                                    pd.dismiss();
                                                 } else {
                                                     FirebaseAuth.getInstance().signOut();
                                                     Toast.makeText(StudentLogin.this, "Please login using a Student account only ", Toast.LENGTH_SHORT).show();
@@ -162,6 +163,7 @@ public class StudentLogin extends AppCompatActivity {
                                     }
                                 } else {
                                     Toast.makeText(StudentLogin.this, task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                                    pd.dismiss();
 
                                 }
 

@@ -74,4 +74,19 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_us">STUDENT PLACEMENT SYSTEM
+
+ The main objective of this Student Placement System App project is to develop an android application which manages placement activities in college makes an interactive GUI where the institute can manage details of students. The applications main aim is to unite the students and companies on a platform so that the searching of jobs will be easy for students and searching for employees will be easy for companies also.
+
+In this application, the company or the recruiter has to register first before login is performed. Once registered you can login into the application and post the notice of job by specifying all the details, like how many vacancies and requirements are. If you incase forget your password you can change your password and login back in the module. Once you login in any module , you did not need to login everytime unless you logout from module. Similarly the students also has to register and login in the module to search the jobs that are available for them. The admin is able to monitor the students who enrolled and also the recruiters that posted their jobs.
+This Student placement application is a Final year project of diploma where we are able to show creativity and the things that we learned in all the passed years of diploma.
+
+        
+Developers-
+Jeet Mistry
+Siddhi Patil
+Gauri Mohape
+Raviraj Dange
+Abhishek Sawle
+</string>
 </resources>

@@ -51,13 +51,15 @@
         android:layout_marginLeft="5dp"
         />
 
-    <Button
+    <TextView
         android:id="@+id/recruiter_viewjobs_card_btnapply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/button"
         android:textColor="#ffffff"
         android:text="Delete" />
 

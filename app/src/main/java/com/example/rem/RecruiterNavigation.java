@@ -3,12 +3,8 @@ package com.example.rem;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.provider.Settings;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.navigation.NavController;
@@ -17,7 +13,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -25,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
-import android.widget.TextView;
 
 public class RecruiterNavigation extends AppCompatActivity {
     private DrawerLayout recruiter_drawer_layout;
@@ -53,7 +47,7 @@ public class RecruiterNavigation extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home_admin, R.id.nav_profile_recruiter, R.id.nav_viewjobs_recruiter,
+                R.id.nav_deletedjobs_admin, R.id.nav_profile_recruiter, R.id.nav_viewjobs_recruiter,
                 R.id.nav_addjob_recruiter, R.id.nav_help_recruiter, R.id.nav_feedback_recruiter,R.id.nav_viewapplications_recruiter)
                 .setDrawerLayout(drawer)
                 .build();

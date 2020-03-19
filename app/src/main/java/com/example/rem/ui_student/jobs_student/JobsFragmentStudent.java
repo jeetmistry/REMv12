@@ -45,9 +45,6 @@ public class JobsFragmentStudent extends Fragment {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference rootRef,userRef;
     private JobsViewModelStudent jobsViewModelStudent;
-    DataSnapshot next;
-    String key;
-    Query query;
     private String cn,cl,jp,wt;
     StudentViewJobViewHolder studentViewJobViewHolder ;
 

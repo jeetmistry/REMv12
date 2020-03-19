@@ -36,7 +36,7 @@ public class ViewjobsFragmentRecruiter extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference rootRef,userRef,userIdRef,jobRef;
+    private DatabaseReference rootRef,userRef,userIdRef,jobRef,deletedJobRef;
     private String userid;
 
     private ViewjobsViewModelRecruiter viewjobsViewModelRecruiter;
@@ -57,6 +57,7 @@ public class ViewjobsFragmentRecruiter extends Fragment {
         userRef = rootRef.child("recruiter");
         userIdRef= userRef.child(userid);
         jobRef = userIdRef.child("Jobs");
+        deletedJobRef = userIdRef.child("Deleted Jobs");
 
         return root;
     }
@@ -71,7 +72,7 @@ public class ViewjobsFragmentRecruiter extends Fragment {
                 .build();
         FirebaseRecyclerAdapter<ViewJobsRecruiter, RecruiterViewJobViewHolder> adapter =new FirebaseRecyclerAdapter<ViewJobsRecruiter, RecruiterViewJobViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull final RecruiterViewJobViewHolder recruiterViewJobViewHolder, final int i, @NonNull ViewJobsRecruiter viewJobsRecruiter) {
+            protected void onBindViewHolder(@NonNull final RecruiterViewJobViewHolder recruiterViewJobViewHolder, final int i, @NonNull final ViewJobsRecruiter viewJobsRecruiter) {
 
                 recruiterViewJobViewHolder.jobPost.setText(viewJobsRecruiter.getJobpost());
                 recruiterViewJobViewHolder.companyName.setText("Company Name : "+viewJobsRecruiter.getCompanyname());
@@ -90,6 +91,17 @@ public class ViewjobsFragmentRecruiter extends Fragment {
                                 switch(which){
                                     case 0:
                                         String key = getRef(i).getKey();
+
+                                        //adding deleted job in deleted job child
+                                        String job,companyname,companydescription,workingtype;
+                                        job = viewJobsRecruiter.getJobpost();
+                                        companyname = viewJobsRecruiter.getCompanyname();
+                                        companydescription=viewJobsRecruiter.getCompanydescription();
+                                        workingtype=viewJobsRecruiter.getWorkingtype();
+                                        ViewJobsRecruiter vjr = new ViewJobsRecruiter(job,companyname,companydescription,workingtype);
+                                        deletedJobRef.push().setValue(vjr);
+
+                                        //deleting the current job
                                         jobRef.child(key).removeValue();
                                         break;
                                     case 1:

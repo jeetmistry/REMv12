@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,6 +18,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -53,6 +55,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.List;
@@ -107,8 +110,7 @@ public class ProfileFragmentStudent extends Fragment {
         student_profile_collegename= root.findViewById(R.id. student_profile_collegename);
         student_profile_passing_year= root.findViewById(R.id. student_profile_passing_year);
         student_profile_fields=root.findViewById(R.id.student_profile_fields);
-        btnupload=root.findViewById(R.id.student_profile_uploadbutton);
-
+        mProgressBar=root.findViewById(R.id.progress_bar);
 
                 profileImage=root.findViewById(R.id.student_profile_imageView);
                 navprofileImage=root.findViewById(R.id.imageViewStudent);
@@ -121,7 +123,20 @@ public class ProfileFragmentStudent extends Fragment {
                 String userid=firebaseAuth.getCurrentUser().getUid().toString();
                 useridReference = userReference.child(userid+"/");
                 StorageReference ProfileRef=useridReference.child("profile/");
+        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+        btnupload=root.findViewById(R.id.student_profile_uploadbutton);
+         btnupload.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 if (mUploadTask != null && mUploadTask.isInProgress()) {
+                     Toast.makeText(getActivity(), "Upload in Progress..", Toast.LENGTH_SHORT).show();
+                 } else {
 
+                     uploadImage();
+                 }
+             }
+         });
         selectImage=root.findViewById(R.id.student_profile_floatingActionButton);
         selectImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -289,51 +304,53 @@ public class ProfileFragmentStudent extends Fragment {
 
         }
 
-
-
-
-
-
-
-
-
-
     //For storing data in imageview of student profile
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_CANCELED) {
-            return;
-        }
-        if (requestCode == GALLERY && resultCode==RESULT_OK){
-            if (data != null) {
-                filePath= data.getData();
-                try {
-                    Bitmap imgbitmap = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), filePath);
+        if (requestCode == GALLERY && resultCode == RESULT_OK
+                && data != null && data.getData() != null
+        ) {
+            filePath = data.getData();
+            Picasso.get().load(filePath).into(profileImage);
 
-                    Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();
-                    profileImage.setImageBitmap(imgbitmap);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getActivity(), "Failed!", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        } else if (requestCode == CAMERA && resultCode==RESULT_OK) {
-            Uri contentURI = data.getData();
-
-
-            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            profileImage.setImageBitmap(thumbnail);
-
-                }
-
-
-            Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();
         }
 
+//        if (resultCode == Activity.RESULT_CANCELED) {
+//            return;
+//        }
+//        if (requestCode == GALLERY && resultCode==RESULT_OK){
+//            if (data != null) {
+//                filePath= data.getData();
+//                try {
+//                    Bitmap imgbitmap = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), filePath);
+//
+//                    Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();
+//                    profileImage.setImageBitmap(imgbitmap);
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                    Toast.makeText(getActivity(), "Failed!", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//        } else if (requestCode == CAMERA && resultCode==RESULT_OK) {
+//            Uri contentURI = data.getData();
+//
+//
+//            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+//            profileImage.setImageBitmap(thumbnail);
+//
+//                }
+//
+//
+//            Toast.makeText(getActivity(), "Image Saved!", Toast.LENGTH_SHORT).show();
+        }
+    private String getFileExtension(Uri uri) {
+        ContentResolver cr = getContext().getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cr.getType(uri));
+    }
 
         //uploading image
         private void uploadImage() {
@@ -360,7 +377,7 @@ public class ProfileFragmentStudent extends Fragment {
                                 Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
                                 while (!urlTask.isSuccessful()) ;
                                 Uri downloadUrl = urlTask.getResult();
-                                Upload upload = new Upload(downloadUrl.toString());
+                                StudentProfileUpload upload = new StudentProfileUpload(downloadUrl.toString());
                                 mDatabaseRef.child(mDatabaseRef.push().getKey()).setValue(upload);
                                 String uploadId = mDatabaseRef.push().getKey();
                                 mDatabaseRef.child(uploadId).setValue(upload);
@@ -390,25 +407,9 @@ public class ProfileFragmentStudent extends Fragment {
 
         }
 
-    private long getFileExtension(Uri contentURI) {
-        return getFileExtension(contentURI);
-    }
 
 
-    public static class Upload{
-            public String mImageUrl;
 
-            public Upload(String mImageUrl) {
-                this.mImageUrl = mImageUrl;
-            }
 
-            public String getmImageUrl() {
-                return mImageUrl;
-            }
-
-            public void setmImageUrl(String mImageUrl) {
-                this.mImageUrl = mImageUrl;
-            }
-        }
 }
 

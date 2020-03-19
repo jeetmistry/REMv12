@@ -1,0 +1,54 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/admin_deletedjobs_cardView"
+    android:layout_width="match_parent"
+    android:layout_height="290dp"
+    android:layout_margin="5dp"
+    android:layout_marginTop="10dp"
+    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="#33ccff"
+    app:cardElevation="2mm">
+
+
+    <TextView
+        android:id="@+id/admin_deletedjobs_card_jobpost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Job Post"
+        android:textSize="35dp" />
+
+    <TextView
+        android:id="@+id/admin_deletedjobs_card_companyname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="10dp"
+        android:text="Company Name"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/admin_deletedjobs_card_companydescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="10dp"
+        android:text="Company Description"
+        android:textSize="20dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/admin_deletedjobs_card_workingtype"
+        android:layout_marginTop="140dp"
+        android:text="Working Type"
+        android:textSize="20dp"
+        android:layout_marginLeft="5dp"
+        />
+
+</androidx.cardview.widget.CardView>

@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home_admin">
+    app:startDestination="@+id/nav_deletedjobs_admin">
 
     <fragment
-        android:id="@+id/nav_home_admin"
+        android:id="@+id/nav_deletedjobs_admin"
         android:name="com.example.rem.ui_recruiter.home_recruiter.HomeFragmentRecruiter"
         android:label="@string/menu_home_recruiter"
         tools:layout="@layout/fragment_home_recruiter" />

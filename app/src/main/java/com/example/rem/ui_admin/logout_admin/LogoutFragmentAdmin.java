@@ -19,6 +19,6 @@ public class LogoutFragmentAdmin extends Fragment {
         Intent logout = new Intent(getActivity(), LoginOption.class);
         Toast.makeText(getActivity(), "Logging Out From Admin ...", Toast.LENGTH_SHORT).show();
         startActivity(logout);
-        return inflater.inflate(R.layout.fragment_home_admin, container, false);
+        return inflater.inflate(R.layout.fragment_deletedjobs_admin, container, false);
     }
 }
